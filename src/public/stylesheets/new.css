@@ -32,3 +32,22 @@ input[type='submit']:focus {
   color: white;
   border-color: white;
 }
+
+.info {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  opacity: 0.7;
+  z-index: 1;
+  bottom: 0.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.info p {
+  background-color: black;
+  margin: 0;
+  padding: 0.5rem;
+  color: white;
+  width: 200px;
+}
