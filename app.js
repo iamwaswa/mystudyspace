@@ -25,6 +25,12 @@ app.get(`/studyspaces`, async (req, res) => {
   res.render(`pages/studyspaces`, { studyspaces });
 });
 
+app.get(`/studyspaces/:_id`, async (req, res) => {
+  const studyspace = await StudySpace.findById(req.params._id);
+  const studyspaces = await StudySpace.find({});
+  res.render(`pages/studyspace`, { studyspace, studyspaces });
+});
+
 app.get(`/studyspaces/new`, (req, res) => {
   res.render(`pages/new`);
 });
