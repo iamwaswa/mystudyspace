@@ -1,18 +1,38 @@
 <% include ../partials/header %>
+  <link type='text/css' rel='stylesheet' href='/stylesheets/new.css'>
 </head>
 <body>
   <main>
-    <section>
-      <p>
-        Adding a new studyspace will happen here...
-      </p>
-      <a
-        class='button-normal'
-        href='/studyspaces'
+    <nav>
+      <a 
+        href='/'
       >
-        Done
+        MyStudySpace
       </a>
+      <section>
+        <form
+          action='/studyspaces/new'
+          method='POST'
+        >
+          <input type='text' placeholder='Type a study space here' name='place' />
+          <input type='submit' value='Search' />
+        </form>
+      </section>
+    </nav>
+    <section
+      class='map-display'
+    >
     </section>
   </main>
+  <script 
+    async 
+    defer 
+    src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBzE-We4NWTDdblcScL_XnqumkVoOAXH8g&libraries=places'
+  >
+  </script>
+  <script 
+    src='/scripts/new.js'
+  >
+  </script>
 </body>
 </html>

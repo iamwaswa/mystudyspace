@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const StudySpace = require('./src/public/scripts/models');
 
 /**
@@ -14,6 +15,7 @@ mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
 
 const app = express();
 app.use(express.static(`${__dirname}/src/public`));
+app.use(bodyParser.urlencoded({extended: true}));
 app.set(`view engine`, `ejs`);
 
 app.get(`/`, (req, res) => {
@@ -25,14 +27,19 @@ app.get(`/studyspaces`, async (req, res) => {
   res.render(`pages/studyspaces`, { studyspaces });
 });
 
+app.get(`/studyspaces/new`, (req, res) => {
+  res.render(`pages/new`);
+});
+
+app.post(`/studyspaces/new`, (req, res) => {
+  console.log(`Creating new studyspace with info: ${req.body.place}`);
+  res.redirect(`/studyspaces`);
+});
+
 app.get(`/studyspaces/:_id`, async (req, res) => {
   const studyspace = await StudySpace.findById(req.params._id);
   const studyspaces = await StudySpace.find({});
   res.render(`pages/studyspace`, { studyspace, studyspaces });
-});
-
-app.get(`/studyspaces/new`, (req, res) => {
-  res.render(`pages/new`);
 });
 
 app.get(`/*`, (req, res) => {
