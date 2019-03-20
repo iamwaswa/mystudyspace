@@ -6,20 +6,20 @@ const content = {
   map: ``,
 };
 
-const querifyInput = (input) => {
-  return input
-    .split(``)
-    .map((character) => {
-      if (character === ` `) {
-        return `+`;
-      } else if (character === `,`) {
-        return ``;
-      } else {
-        return character;
-      }
-    })
-    .join(``);
-};
+// const querifyInput = (input) => {
+//   return input
+//     .split(``)
+//     .map((character) => {
+//       if (character === ` `) {
+//         return `+`;
+//       } else if (character === `,`) {
+//         return ``;
+//       } else {
+//         return character;
+//       }
+//     })
+//     .join(``);
+// };
 
 const removeCountryAndPostFromAddress = (address) => {
   const addressArray = address.split(``);
@@ -43,29 +43,21 @@ const addLineBreaksToAddress = (address) => {
 
 const initResultsDisplay = (results) => {
   results.forEach((result) => {
-    const {
-      formatted_address: address,
-      geometry: position,
-      icon: iconUrl,
-      name,
-      photos,
-      rating
-    } = result;
+    const { formatted_address, geometry, icon, name, place_id } = result;
 
-    const formattedAddress = addLineBreaksToAddress(address);
+    const formattedAddress = addLineBreaksToAddress(formatted_address);
 
     const resultMarker = new google.maps.Marker({
-      position: position.location,
+      position: geometry.location,
       map: content.map,
       animation: google.maps.Animation.DROP,
       icon: {
-        url: iconUrl,
+        url: icon,
         scaledSize: new google.maps.Size(20, 20),
       }
     });
 
-    const searchQuery = `/maps/search/${querifyInput(name)}+${querifyInput(address)}`;
-    const formContent = `<a target='_blank' href='http://www.google.com${searchQuery}'>Add Studyspace</a>`;
+    const formContent = `<form class='info-window' action='/studyspaces/new' method='POST'><input type='text' name='placeId' value='${place_id}'/><input type='submit' value='Add StudySpace'/></form>`
     const infoWindow = new google.maps.InfoWindow({
       content: `<strong>${name}</strong></br></br>${formattedAddress}</br></br>${formContent}`,
     });
@@ -87,7 +79,6 @@ const initPlacesSearch = () => {
   places.forEach((place) => {
     const request = {
       query: place,
-      openNow: true,
       location: content.userPosition,
       radius: radiusSize,
     };
@@ -136,6 +127,7 @@ const assignMyPosition = (position) => {
     lat: position.coords.latitude,
     lng: position.coords.longitude
   };
+
   initMap();
 };
 
@@ -143,7 +135,7 @@ const findMyLocation = () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(assignMyPosition);
   } else {
-    console.error(`Your browser does not support geolcation.`);
+    alert(`Your browser does not support geolcation. Consider updating your browser to the latest version or using a different browser`);
   }
 };
 

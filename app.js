@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const StudySpace = require('./src/public/scripts/models');
+const getPlaceDetails = require('./src/public/scripts/create');
 
 /**
  * Mongoose Setup
@@ -32,7 +33,7 @@ app.get(`/studyspaces/new`, (req, res) => {
 });
 
 app.post(`/studyspaces/new`, (req, res) => {
-  console.log(`Creating new studyspace with info: ${req.body.place}`);
+  const studyspace = getPlaceDetails(req.body.placeId);
   res.redirect(`/studyspaces`);
 });
 
