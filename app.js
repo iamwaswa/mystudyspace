@@ -34,8 +34,7 @@ app.get(`/studyspaces/new`, (req, res) => {
 
 app.post(`/studyspaces/new`, async (req, res) => {
   const studyspace = await getPlaceDetailsAsync(req.body.placeId);
-  const done = await StudySpace.create({ ...studyspace });
-  console.log(done);
+  await StudySpace.create({ ...studyspace });
   res.redirect(`/studyspaces`);
 });
 
