@@ -41,7 +41,6 @@ const createStudySpaceObjectAsync = async (result) => {
     url: ``,
   };
 
-  console.log(result.photos[0]);
   const request = {
     photoreference: result.photos[0].photo_reference,
     maxwidth: 1600,
@@ -50,6 +49,7 @@ const createStudySpaceObjectAsync = async (result) => {
 
   try {
     photo.url = await googleMapsClient.placesPhoto(request).asPromise();
+    
     return {
       name: result.name,
       type: result.types[0],
