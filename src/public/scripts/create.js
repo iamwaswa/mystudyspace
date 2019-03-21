@@ -1,9 +1,4 @@
-const GoogleMaps = require('@google/maps');
-
-const googleMapsClient = GoogleMaps.createClient({
-  key: process.env.GOOGLE_MAPS_API_KEY,
-  Promise: Promise,
-});
+const googleMapsClient = require('./client');
 
 const extractAddressObject = (address) => {
   const trimmed = address.trim();

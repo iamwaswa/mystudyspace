@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const StudySpace = require('./src/public/scripts/models');
 const getPlaceDetailsAsync = require('./src/public/scripts/create');
+const searchForPlaceAsync = require('./src/public/scripts/search');
 
 /**
  * Mongoose Setup
@@ -33,8 +34,18 @@ app.get(`/studyspaces/new`, (req, res) => {
 });
 
 app.post(`/studyspaces/new`, async (req, res) => {
-  const studyspace = await getPlaceDetailsAsync(req.body.placeId);
-  await StudySpace.create({ ...studyspace });
+  let studyspace;
+
+  if (req.body.placeId) {
+    studyspace = await getPlaceDetailsAsync(req.body.placeId);
+  } else if (req.body.place) {
+    studyspace = await searchForPlaceAsync(req.body.place);
+  }
+
+  if (studyspace) {
+    await StudySpace.create({ ...studyspace });
+  }
+
   res.redirect(`/studyspaces`);
 });
 
