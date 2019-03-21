@@ -6,21 +6,6 @@ const content = {
   map: ``,
 };
 
-// const querifyInput = (input) => {
-//   return input
-//     .split(``)
-//     .map((character) => {
-//       if (character === ` `) {
-//         return `+`;
-//       } else if (character === `,`) {
-//         return ``;
-//       } else {
-//         return character;
-//       }
-//     })
-//     .join(``);
-// };
-
 const removeCountryAndPostFromAddress = (address) => {
   const addressArray = address.split(``);
   const countryStartIndex = addressArray.lastIndexOf(`,`);
