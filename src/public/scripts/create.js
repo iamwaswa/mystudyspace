@@ -48,7 +48,7 @@ const createStudySpaceObjectAsync = async (result) => {
   const capitalizedType = result.types[0].substring(0, 1).toUpperCase() + result.types[0].substring(1);
   
   const response = await getPhotoAsync(result.photos[0]);
-  console.log(response);
+  const photoUrl = `https://${response.req.socket._host}${response.req.path}`;
 
   return {
     name: result.name,
@@ -59,7 +59,7 @@ const createStudySpaceObjectAsync = async (result) => {
     province: addressObject[`region`],
     website: result.website,
     phone: result.formatted_phone_number,
-    image: result.photos[0].photo_reference,
+    image: photoUrl,
     rating: result.rating,
   };
 };
