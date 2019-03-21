@@ -3,6 +3,8 @@ const handleResults = (results) => {
 };
 
 const getStudySpaceDetails = (placeId) => {
+  const sessionToken = new google.maps.places.AutocompleteSessionToken();
+  
   const request = {
     fields: [
       `address_components`, 
@@ -17,7 +19,9 @@ const getStudySpaceDetails = (placeId) => {
       `website`,
     ],
     placeId,
-  }
+    sessionToken,
+  };
+
   const textSearchService = new google.maps.places.PlacesService(
     document.getElementsByClassName(`map-display`)[0]
   );
