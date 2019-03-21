@@ -35,7 +35,6 @@ app.get(`/studyspaces/new`, (req, res) => {
 
 app.post(`/studyspaces/new`, async (req, res) => {
   let studyspace;
-
   if (req.body.placeId) {
     studyspace = await getPlaceDetailsAsync(req.body.placeId);
   } else if (req.body.place) {
@@ -45,7 +44,7 @@ app.post(`/studyspaces/new`, async (req, res) => {
   if (studyspace) {
     await StudySpace.create({ ...studyspace });
   }
-
+  
   res.redirect(`/studyspaces`);
 });
 

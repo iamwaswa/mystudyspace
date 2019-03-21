@@ -1,5 +1,19 @@
 const googleMapsClient = require('./client');
 
+const getPhotoAsync = 
+async ({ photo_reference, height, width }) => {
+
+  const maxDimension = 1600;
+
+  const request = {
+    photoreference: photo_reference,
+    maxwidth: width > maxDimension ? maxDimension : width,
+    maxheight: height > maxDimension ? maxDimension : height,
+  };
+
+  return await googleMapsClient.placesPhoto(request).asPromise();  
+};
+
 const extractAddressObject = (address) => {
   const trimmed = address.trim();
   const array = trimmed.split(`</span>`);
@@ -31,35 +45,23 @@ const extractAddressObject = (address) => {
 
 const createStudySpaceObjectAsync = async (result) => {
   const addressObject = extractAddressObject(result.adr_address);
+  const capitalizedType = result.types[0].substring(0, 1).toUpperCase() + result.types[0].substring(1);
+  
+  const response = await getPhotoAsync(result.photos[0]);
+  console.log(response);
 
-  const photo = {
-    url: ``,
+  return {
+    name: result.name,
+    type: capitalizedType,
+    address: addressObject[`street-address`],
+    postalCode: addressObject[`postal-code`],
+    city: addressObject[`locality`],
+    province: addressObject[`region`],
+    website: result.website,
+    phone: result.formatted_phone_number,
+    image: result.photos[0].photo_reference,
+    rating: result.rating,
   };
-
-  const request = {
-    photoreference: result.photos[0].photo_reference,
-    maxwidth: 1600,
-    maxheight: 1600,
-  };
-
-  try {
-    photo.url = await googleMapsClient.placesPhoto(request).asPromise();
-    
-    return {
-      name: result.name,
-      type: result.types[0],
-      address: addressObject[`street-address`],
-      postalCode: addressObject[`postal-code`],
-      city: addressObject[`locality`],
-      province: addressObject[`region`],
-      website: result.website,
-      phone: result.formatted_phone_number,
-      image: photo.url,
-      rating: result.rating,
-    };
-  } catch (error) {
-    console.error(error);
-  }
 };
 
 const getStudySpaceDetailsAsync = async (placeid) => {
