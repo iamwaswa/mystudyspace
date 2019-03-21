@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const StudySpace = require('./src/public/scripts/models');
-const getPlaceDetails = require('./src/public/scripts/create');
+const getPlaceDetailsAsync = require('./src/public/scripts/create');
 
 /**
  * Mongoose Setup
@@ -32,8 +32,9 @@ app.get(`/studyspaces/new`, (req, res) => {
   res.render(`pages/new`);
 });
 
-app.post(`/studyspaces/new`, (req, res) => {
-  const studyspace = getPlaceDetails(req.body.placeId);
+app.post(`/studyspaces/new`, async (req, res) => {
+  const studyspace = await getPlaceDetailsAsync(req.body.placeId);
+  console.log(studyspace);
   res.redirect(`/studyspaces`);
 });
 
