@@ -74,12 +74,45 @@ li a {
   }
 }
 
-.button-container {
+.comments-section {
+  margin-top: 2rem;
+}
+
+.new-comment-container {
   padding: 1rem;
   text-align: right;
-  border: 2px solid black;
+  border: 1px solid black;
+}
+
+.form-container {
+  margin-top: 1rem;
 }
 
 .hide-form-container {
   display: none;
+}
+
+.form-container form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 0.5rem;
+  grid-template-rows: repeat(2, auto);
+}
+
+.form-container form input {
+  outline: none;
+}
+
+.form-container form input[type='text'] {
+  padding: 0.5rem;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comments-container {
+  padding: 1rem;
+  border: 1px solid black;
 }

@@ -105,31 +105,36 @@
           class='comments-section'
         >
           <section
-            class='button-container'
+            class='new-comment-container'
           >
             <button
               id='button'
             >
               Add New Comment
             </button>
-          </section>
-          <section
-            class='form-container'
-          >
-            <form
-              action='/studyspace/<%= studyspace._id %>/comments'
-              method='POST'
+            <section
+              class='form-container'
             >
-              <input 
-                type='text'
-                name='comment'
-              />
-              <input 
-                id='submit'
-                type='submit'
-                value='Submit'
-              />
-            </form>
+              <form
+                action='/studyspace/<%= studyspace._id %>/comments'
+                method='POST'
+              >
+                <input 
+                  type='text'
+                  placeholder='Enter a new comment here...'
+                  name='comment'
+                />
+                <section
+                  class='submit-container'
+                >
+                  <input 
+                    id='submit'
+                    type='submit'
+                    value='Submit'
+                  />
+                </section>
+              </form>
+            </section>
           </section>
           <section
             class='comments-container'
