@@ -42,7 +42,11 @@ app.post(`/studyspaces/new`, async (req, res) => {
     studyspace = await searchForPlaceAsync(req.body.place);
   }
 
-  const studyspaceExists = await StudySpace.findOne({ name: studyspace.name });
+  const studyspaceExists = await StudySpace.findOne({ 
+    name: studyspace.name,
+    address: studyspace.address,
+    postalCode: studyspace.postalCode,
+  });
 
   if (!studyspaceExists && studyspace) {
     await StudySpace.create({ ...studyspace });
