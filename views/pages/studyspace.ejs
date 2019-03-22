@@ -69,13 +69,16 @@
                 Province: <%= studyspace.province %>
               </p>
               <p>
-                Website: 
-                <a
-                  href='/'
-                  target='_blank'
-                >
-                  <%= studyspace.website %>
-                </a>
+                Website:
+                <% if (studyspace.website === 'N/A') { %>
+                  <span>
+                    <%= studyspace.website %>
+                  </span>
+                <% } else { %>
+                  <a href='/' target='_blank'>
+                    <%= studyspace.website %>
+                  </a>
+                <% } %>
               </p>
               <p>
                 Phone: <%= studyspace.phone %>

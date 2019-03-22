@@ -1,4 +1,5 @@
 const googleMapsClient = require('./client');
+const defaults = require('./defaults');
 
 const getPhotoAsync = 
 async ({ photo_reference, height, width }) => {
@@ -51,16 +52,16 @@ const createStudySpaceObjectAsync = async (result) => {
   const photoUrl = `https://${response.req.socket._host}${response.req.path}`;
 
   return {
-    name: result.name ? result.name : `N/A`,
-    type: capitalizedType ? capitalizedType : `N/A`,
-    address: addressObject[`street-address`] ? addressObject[`street-address`] : `N/A`,
-    postalCode: addressObject[`postal-code`] ? addressObject[`postal-code`] : `N/A`,
-    city: addressObject[`locality`] ? addressObject[`locality`] : `N/A`,
-    province: addressObject[`region`] ? addressObject[`region`] : `N/A`,
-    website: result.website ? result.website : `N/A`,
-    phone: result.formatted_phone_number ? result.formatted_phone_number : `N/A`,
-    image: photoUrl ? photoUrl : `N/A`,
-    rating: result.rating ? result.rating : `N/A`,
+    name: result.name ? result.name : defaults[`name`],
+    type: capitalizedType ? capitalizedType : defaults[`type`],
+    address: addressObject[`street-address`] ? addressObject[`street-address`] : defaults[`address`],
+    postalCode: addressObject[`postal-code`] ? addressObject[`postal-code`] : defaults[`postalCode`],
+    city: addressObject[`locality`] ? addressObject[`locality`] : defaults[`city`],
+    province: addressObject[`region`] ? addressObject[`region`] : defaults[`province`],
+    website: result.website ? result.website : defaults[`website`],
+    phone: result.formatted_phone_number ? result.formatted_phone_number : defaults[`phone`],
+    image: photoUrl ? photoUrl : defaults[`image`],
+    rating: result.rating ? result.rating : defaults[`rating`],
   };
 };
 
