@@ -73,3 +73,13 @@ li a {
     text-align: right;
   }
 }
+
+.button-container {
+  padding: 1rem;
+  text-align: right;
+  border: 2px solid black;
+}
+
+.hide-form-container {
+  display: none;
+}

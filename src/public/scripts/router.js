@@ -1,5 +1,6 @@
 const express = require('express');
 const StudySpace = require('./models/studyspace');
+const Comment = require('./models/comment');
 const getPlaceDetailsAsync = require('./create');
 const searchForPlaceAsync = require('./search');
 
@@ -16,11 +17,7 @@ router.get(`/studyspaces`, async (req, res) => {
   });
 });
 
-router.get(`/studyspaces/new`, (req, res) => {
-  res.render(`pages/new`);
-});
-
-router.post(`/studyspaces/new`, async (req, res) => {
+router.post(`/studyspaces`, async (req, res) => {
 
   let studyspace;
   if (req.body.placeId) {
@@ -44,13 +41,30 @@ router.post(`/studyspaces/new`, async (req, res) => {
   res.redirect(`/studyspaces`);
 });
 
+router.get(`/studyspaces/new`, (req, res) => {
+  res.render(`pages/new`);
+});
+
 router.get(`/studyspaces/:_id`, async (req, res) => {
   const studyspace = await StudySpace.findById(req.params._id);
   const studyspaces = await StudySpace.find({});
+  const comments = await Comment.find({});
+
   res.render(`pages/studyspace`, {
     studyspace,
-    studyspaces
+    studyspaces,
+    comments,
   });
+});
+
+router.post(`/studyspace/:_id/comments`, async (req, res) => {
+  if (req.body.comment) {
+    await Comment.create({
+      text: req.body.comment,
+    });
+  }
+
+  res.redirect(`/studyspaces/${req.params._id}`);
 });
 
 router.get(`/*`, (req, res) => {

@@ -42,7 +42,7 @@ const initResultsDisplay = (results) => {
       }
     });
 
-    const formContent = `<form class='info-window' action='/studyspaces/new' method='POST'><input type='text' name='placeId' value='${place_id}'/><input type='submit' value='Add StudySpace'/></form>`
+    const formContent = `<form class='info-window' action='/studyspaces' method='POST'><input type='text' name='placeId' value='${place_id}'/><input type='submit' value='Add StudySpace'/></form>`
     const infoWindow = new google.maps.InfoWindow({
       content: `<strong>${name}</strong></br></br>${formattedAddress}</br></br>${formContent}`,
     });

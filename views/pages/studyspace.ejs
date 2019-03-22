@@ -101,8 +101,77 @@
             </section>
           </section>
         </section>
+        <section
+          class='comments-section'
+        >
+          <section
+            class='button-container'
+          >
+            <button
+              id='button'
+            >
+              Add New Comment
+            </button>
+          </section>
+          <section
+            class='form-container'
+          >
+            <form
+              action='/studyspace/<%= studyspace._id %>/comments'
+              method='POST'
+            >
+              <input 
+                type='text'
+                name='comment'
+              />
+              <input 
+                id='submit'
+                type='submit'
+                value='Submit'
+              />
+            </form>
+          </section>
+          <section
+            class='comments-container'
+          >
+          <% comments.map((comment) => { %>
+            <section
+              class='single-comment-container'
+            >
+              <p>
+                <%= comment.text %>
+              </p>
+              <section
+                class='comment-buttons-container'
+              >
+                <a
+                  href='/studyspaces/<%= studyspace._id %>/comments/<%= comment._id %>/edit'                
+                >
+                  Edit
+                </a>
+                <form
+                  class='delete-form'
+                  action='/studyspaces/<%= studyspace._id %>/comments/<%= comment._id %>'
+                  method='DELETE'
+                >
+                  <input 
+                    type='submit'
+                    value='Delete'
+                  />
+                </form>
+              </section>
+            </section>
+          <% }); %>
+          </section>
+        </section>
       </section>
     </section>
   </main>
+  <script
+    async
+    defer
+    src='/scripts/studyspace.js'
+  >
+  </script>
 </body>
 </html>
