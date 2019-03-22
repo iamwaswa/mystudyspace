@@ -15,19 +15,28 @@ router.get(`/signup`, (req, res) => {
   res.render(`pages/signup`);
 });
 
-router.post(`/signup`, (req, res) => {
-  const userFound = User.find({ username: req.body.username });
-  if (userFound) {
-    res.redirect(`/signup`);
+router.post(`/signup`, async (req, res) => {
+  try {
+    const userFound = await User.findOne({ username: req.body.username });
+    if (userFound) {
+      res.redirect(`/signup`);
+      return;
+    }
+    
+    await User.create({ username: req.body.username, password: req.body.password });
+    res.redirect(`/`);
+  } catch (error) {
+    console.error(error);
   }
-
-  User.create({ username: req.body.username, password: req.body.password });
-  res.redirect(`/`);
 });
 
 router.get(`/studyspaces`, async (req, res) => {
-  const studyspaces = await StudySpace.find({});
-  res.render(`pages/studyspaces`, { studyspaces });
+  try {
+    const studyspaces = await StudySpace.find({});
+    res.render(`pages/studyspaces`, { studyspaces });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 router.get(`/studyspaces/new`, (req, res) => {
@@ -36,69 +45,93 @@ router.get(`/studyspaces/new`, (req, res) => {
 
 router.post(`/studyspaces`, async (req, res) => {
 
-  let studyspace;
-  if (req.body.placeId) {
-    studyspace = await getPlaceDetailsAsync(req.body.placeId);
-  } else if (req.body.place) {
-    studyspace = await searchForPlaceAsync(req.body.place);
-  }
-
-  const studyspaceExists = await StudySpace.findOne({
-    name: studyspace.name,
-    address: studyspace.address,
-    postalCode: studyspace.postalCode,
-  });
-
-  if (!studyspaceExists && studyspace) {
-    await StudySpace.create({
-      ...studyspace
+  try {
+    let studyspace;
+    if (req.body.placeId) {
+      studyspace = await getPlaceDetailsAsync(req.body.placeId);
+    } else if (req.body.place) {
+      studyspace = await searchForPlaceAsync(req.body.place);
+    }
+  
+    const studyspaceExists = await StudySpace.findOne({
+      name: studyspace.name,
+      address: studyspace.address,
+      postalCode: studyspace.postalCode,
     });
+  
+    if (!studyspaceExists && studyspace) {
+      await StudySpace.create({
+        ...studyspace
+      });
+    }
+  
+    res.redirect(`/studyspaces`); 
+  } catch (error) {
+    console.error(error);
   }
-
-  res.redirect(`/studyspaces`);
 });
 
 router.get(`/studyspaces/:_id`, async (req, res) => {
-  const studyspace = await StudySpace.findById(req.params._id);
-  const studyspaces = await StudySpace.find({});
-  const comments = await Comment.find({ studyspace: req.params._id });
-
-  res.render(`pages/studyspace`, {
-    studyspace,
-    studyspaces,
-    comments,
-  });
+  try {
+    const studyspace = await StudySpace.findById(req.params._id);
+    const studyspaces = await StudySpace.find({});
+    const comments = await Comment.find({ studyspace: req.params._id });
+  
+    res.render(`pages/studyspace`, {
+      studyspace,
+      studyspaces,
+      comments,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 router.post(`/studyspaces/:_id/comments`, async (req, res) => {
-  if (req.body.comment) {
-    await Comment.create({
-      studyspace: req.params._id,
-      text: req.body.comment,
-    });
+  try {
+    if (req.body.comment) {
+      await Comment.create({
+        studyspace: req.params._id,
+        text: req.body.comment,
+      });
+    }
+  
+    res.redirect(`/studyspaces/${req.params._id}`);
+  } catch (error) {
+    console.error(error);
   }
-
-  res.redirect(`/studyspaces/${req.params._id}`);
 });
 
 router.get(`/studyspaces/:_id/comments/:comment_id/edit`, async (req, res) => {
-  const { text } = await Comment.findById(req.params.comment_id);
-
-  res.render(`pages/editcomment`, {
-    studyspaceId: req.params._id,
-    commentId: req.params.comment_id,
-    comment: text,
-  });
+  try {
+    const { text } = await Comment.findById(req.params.comment_id);
+  
+    res.render(`pages/editcomment`, {
+      studyspaceId: req.params._id,
+      commentId: req.params.comment_id,
+      comment: text,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 router.put(`/studyspaces/:_id/comments/:comment_id`, async (req, res) => {
-  await Comment.findOneAndUpdate({ _id: req.params.comment_id }, { text: req.body.comment });
-  res.redirect(`/studyspaces/${req.params._id}`);
+  try {
+    await Comment.findOneAndUpdate({ _id: req.params.comment_id }, { text: req.body.comment });
+    res.redirect(`/studyspaces/${req.params._id}`);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 router.delete(`/studyspaces/:_id/comments/:comment_id`, async (req, res) => {
-  await Comment.findByIdAndDelete(req.params.comment_id);
-  res.redirect(`/studyspaces/${req.params._id}`);
+  try {
+    await Comment.findByIdAndDelete(req.params.comment_id);
+    res.redirect(`/studyspaces/${req.params._id}`);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 router.get(`/*`, (req, res) => {
