@@ -3,6 +3,15 @@
 </head>
 <body>
   <main>
+  <% if (message.length) { %>
+    <section
+      class='message-section'
+    >
+      <p>
+        <%= message %>
+      </p>
+    </section>
+  <% } %>
     <section 
       class='container'
     >
@@ -38,4 +47,10 @@
       </form>
     </section> 
   </main>
+  <script
+    async
+    defer
+    src='/scripts/pages/signup.js'
+  >
+  </script>
 </body>

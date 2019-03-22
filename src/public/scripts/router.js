@@ -7,23 +7,27 @@ const searchForPlaceAsync = require('./search');
 
 const router = express.Router();
 
+const FLASH_KEY = `info`;
+
 router.get(`/`, (req, res) => {
-  res.render(`pages/index`);
+  res.render(`pages/index`, { message: req.flash(FLASH_KEY) });
 });
 
 router.get(`/signup`, (req, res) => {
-  res.render(`pages/signup`);
+  res.render(`pages/signup`, { message: req.flash(FLASH_KEY) });
 });
 
 router.post(`/signup`, async (req, res) => {
   try {
     const userFound = await User.findOne({ username: req.body.username });
     if (userFound) {
+      req.flash(FLASH_KEY, `Username already exists. Please choose a different one`);
       res.redirect(`/signup`);
       return;
     }
     
     await User.create({ username: req.body.username, password: req.body.password });
+    req.flash(FLASH_KEY, `Hello ${req.body.username}!`);
     res.redirect(`/`);
   } catch (error) {
     console.error(error);

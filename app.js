@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const flash = require('connect-flash');
 const router = require('./src/public/scripts/router');
 
 /**
@@ -19,6 +22,9 @@ app.set(`view engine`, `ejs`);
 app.use(express.static(`${__dirname}/src/public`));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride(`_method`));
+app.use(cookieParser(process.env.SECRET));
+app.use(session({ secret: process.env.SECRET }));
+app.use(flash());
 app.use(router);
 
 app.listen(process.env.PORT, () => {
