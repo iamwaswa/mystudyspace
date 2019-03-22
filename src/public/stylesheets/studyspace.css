@@ -108,12 +108,17 @@ li a {
 }
 
 .comments-container {
+  border: 0.5px solid black;
+}
+
+.single-comment-container {
   padding: 1rem;
   border: solid black;
-  border-top-width: 0.5px;
-  border-right-width: 1px;
-  border-bottom-width: 1px;
-  border-left-width: 1px;
+  border-width: 0.5px 0.5px 0.25px 0.25px;
+}
+
+.single-comment-container p {
+  margin-top: 0;
 }
 
 .comment-buttons-container {
