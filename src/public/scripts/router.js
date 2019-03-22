@@ -1,6 +1,7 @@
 const express = require('express');
 const StudySpace = require('./models/studyspace');
 const Comment = require('./models/comment');
+const User = require('./models/user');
 const getPlaceDetailsAsync = require('./create');
 const searchForPlaceAsync = require('./search');
 
@@ -8,6 +9,20 @@ const router = express.Router();
 
 router.get(`/`, (req, res) => {
   res.render(`pages/index`);
+});
+
+router.get(`/signup`, (req, res) => {
+  res.render(`pages/signup`);
+});
+
+router.post(`/signup`, (req, res) => {
+  const userFound = User.find({ username: req.body.username });
+  if (userFound) {
+    res.redirect(`/signup`);
+  }
+
+  User.create({ username: req.body.username, password: req.body.password });
+  res.redirect(`/`);
 });
 
 router.get(`/studyspaces`, async (req, res) => {

@@ -1,15 +1,8 @@
 <% include ../partials/header %>
-  <link type='text/css' rel='stylesheet' href='/stylesheets/login.css'>
+  <link type='text/css' rel='stylesheet' href='/stylesheets/signup.css'>
 </head>
 <body>
   <main>
-    <section
-      class='message'
-    >
-      <p>
-        <%= message %>
-      </p>
-    </section>
     <section 
       class='container'
     >
@@ -23,11 +16,13 @@
         <input 
           class='input-normal'
           type='text'
+          name='username'
           placeholder='Username'
         />
         <input 
           class='input-normal'
           type='password'
+          name='password'
           placeholder='Password'
         />
         <input 
