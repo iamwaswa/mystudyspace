@@ -1,8 +1,9 @@
 const express = require('express');
-const router = express.Router();
 const StudySpace = require('./models/studyspace');
 const getPlaceDetailsAsync = require('./create');
 const searchForPlaceAsync = require('./search');
+
+const router = express.Router();
 
 router.get(`/`, (req, res) => {
   res.render(`pages/index`);
