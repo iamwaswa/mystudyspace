@@ -15,6 +15,10 @@ router.get(`/studyspaces`, async (req, res) => {
   res.render(`pages/studyspaces`, { studyspaces });
 });
 
+router.get(`/studyspaces/new`, (req, res) => {
+  res.render(`pages/new`);
+});
+
 router.post(`/studyspaces`, async (req, res) => {
 
   let studyspace;
@@ -37,10 +41,6 @@ router.post(`/studyspaces`, async (req, res) => {
   }
 
   res.redirect(`/studyspaces`);
-});
-
-router.get(`/studyspaces/new`, (req, res) => {
-  res.render(`pages/new`);
 });
 
 router.get(`/studyspaces/:_id`, async (req, res) => {
