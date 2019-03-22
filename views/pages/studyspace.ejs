@@ -108,6 +108,7 @@
             class='new-comment-container'
           >
             <button
+              class='button-normal'
               id='button'
             >
               Add New Comment
@@ -128,6 +129,7 @@
                   class='submit-container'
                 >
                   <input 
+                    class='button-normal'
                     id='submit'
                     type='submit'
                     value='Submit'
@@ -150,6 +152,7 @@
                 class='comment-buttons-container'
               >
                 <a
+                  class='button-normal edit-button'
                   href='/studyspaces/<%= studyspace._id %>/comments/<%= comment._id %>/edit'                
                 >
                   Edit
@@ -160,6 +163,7 @@
                   method='DELETE'
                 >
                   <input 
+                    class='button-normal'
                     type='submit'
                     value='Delete'
                   />

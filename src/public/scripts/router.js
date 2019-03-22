@@ -67,6 +67,11 @@ router.post(`/studyspace/:_id/comments`, async (req, res) => {
   res.redirect(`/studyspaces/${req.params._id}`);
 });
 
+router.delete(`/studyspaces/:_id/comments/:comment_id`, async (req, res) => {
+  await Comment.findByIdAndDelete(req.params.comment_id);
+  res.redirect(`/studyspaces/${req.params._id}`);
+});
+
 router.get(`/*`, (req, res) => {
   res.send(`The page you are looking for does not exist!`);
 });

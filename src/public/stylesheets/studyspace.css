@@ -116,3 +116,11 @@ li a {
   padding: 1rem;
   border: 1px solid black;
 }
+
+.comment-buttons-container {
+  display: flex;
+}
+
+.edit-button {
+  margin-right: 0.5rem;
+}
