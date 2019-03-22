@@ -51,16 +51,16 @@ const createStudySpaceObjectAsync = async (result) => {
   const photoUrl = `https://${response.req.socket._host}${response.req.path}`;
 
   return {
-    name: result.name,
-    type: capitalizedType,
-    address: addressObject[`street-address`],
-    postalCode: addressObject[`postal-code`],
-    city: addressObject[`locality`],
-    province: addressObject[`region`],
-    website: result.website,
-    phone: result.formatted_phone_number,
-    image: photoUrl,
-    rating: result.rating,
+    name: result.name ? result.name : `N/A`,
+    type: capitalizedType ? capitalizedType : `N/A`,
+    address: addressObject[`street-address`] ? addressObject[`street-address`] : `N/A`,
+    postalCode: addressObject[`postal-code`] ? addressObject[`postal-code`] : `N/A`,
+    city: addressObject[`locality`] ? addressObject[`locality`] : `N/A`,
+    province: addressObject[`region`] ? addressObject[`region`] : `N/A`,
+    website: result.website ? result.website : `N/A`,
+    phone: result.formatted_phone_number ? result.formatted_phone_number : `N/A`,
+    image: photoUrl ? photoUrl : `N/A`,
+    rating: result.rating ? result.rating : `N/A`,
   };
 };
 
