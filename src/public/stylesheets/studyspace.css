@@ -102,14 +102,6 @@ li a {
   grid-template-rows: repeat(2, auto);
 }
 
-.form-container form input {
-  outline: none;
-}
-
-.form-container form input[type='text'] {
-  padding: 0.5rem;
-}
-
 .submit-container {
   display: flex;
   justify-content: flex-end;
