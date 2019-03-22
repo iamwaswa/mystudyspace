@@ -9,7 +9,7 @@ const searchForPlaceAsync = require('./src/public/scripts/search');
  * Mongoose Setup
  */
 
-mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true, autoIndex: false });
 
 /**
  * Express Setup
@@ -34,6 +34,7 @@ app.get(`/studyspaces/new`, (req, res) => {
 });
 
 app.post(`/studyspaces/new`, async (req, res) => {
+
   let studyspace;
   if (req.body.placeId) {
     studyspace = await getPlaceDetailsAsync(req.body.placeId);
@@ -41,7 +42,9 @@ app.post(`/studyspaces/new`, async (req, res) => {
     studyspace = await searchForPlaceAsync(req.body.place);
   }
 
-  if (studyspace) {
+  const studyspaceExists = await StudySpace.findOne({ name: studyspace.name });
+
+  if (!studyspaceExists && studyspace) {
     await StudySpace.create({ ...studyspace });
   }
   
