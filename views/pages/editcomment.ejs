@@ -11,11 +11,12 @@
         Edit Comment
       </h2>
       <form
-        action='/studyspaces/<%= studyspaceId %>/comments/<%= commentId %>'
-        method='PUT'
+        action='/studyspaces/<%= studyspaceId %>/comments/<%= commentId %>?_method=PUT'
+        method='POST'
       >
         <input 
           class='input-normal'
+          name='comment'
           type='text'
           placeholder='Edit comment here...'
           value='<%= comment %>'

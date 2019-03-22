@@ -54,6 +54,19 @@ ul {
   padding: 0;
 }
 
+.message {
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.message p {
+  margin: 0;
+  background-color: rgba(219, 41, 41, 0.452);
+  border: 1px solid rgb(219, 41, 41);
+  border-radius: 2px;
+  color: rgb(219, 41, 41);
+}
+
 img {
   width: 100%;
   height: auto;

@@ -1,4 +1,11 @@
-section {
+/* main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 50px auto;
+  height: 100%;
+} */
+
+.content {
   display: flex;
   flex-direction: column;
   justify-content: center;

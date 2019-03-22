@@ -12,9 +12,7 @@ router.get(`/`, (req, res) => {
 
 router.get(`/studyspaces`, async (req, res) => {
   const studyspaces = await StudySpace.find({});
-  res.render(`pages/studyspaces`, {
-    studyspaces
-  });
+  res.render(`pages/studyspaces`, { studyspaces });
 });
 
 router.post(`/studyspaces`, async (req, res) => {
@@ -78,7 +76,7 @@ router.get(`/studyspaces/:_id/comments/:comment_id/edit`, async (req, res) => {
 });
 
 router.put(`/studyspaces/:_id/comments/:comment_id`, async (req, res) => {
-  await Comment.findByIdAndUpdate(req.params.comment_id, { text: comment });
+  await Comment.findOneAndUpdate({ _id: req.params.comment_id }, { text: req.body.comment });
   res.redirect(`/studyspaces/${req.params._id}`);
 });
 

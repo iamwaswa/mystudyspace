@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const router = require('./src/public/scripts/router');
 
 /**
@@ -16,7 +17,8 @@ mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true, autoIndex: fa
 const app = express();
 app.set(`view engine`, `ejs`);
 app.use(express.static(`${__dirname}/src/public`));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride(`_method`));
 app.use(router);
 
 app.listen(process.env.PORT, () => {

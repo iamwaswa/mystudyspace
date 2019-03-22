@@ -160,8 +160,8 @@
                 </a>
                 <form
                   class='delete-form'
-                  action='/studyspaces/<%= studyspace._id %>/comments/<%= comment._id %>'
-                  method='DELETE'
+                  action='/studyspaces/<%= studyspace._id %>/comments/<%= comment._id %>?_method=DELETE'
+                  method='POST'
                 >
                   <input 
                     class='button-normal'
