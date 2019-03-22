@@ -57,14 +57,14 @@ router.get(`/studyspaces/:_id`, async (req, res) => {
   });
 });
 
-router.post(`/studyspace/:_id/comments`, async (req, res) => {
+router.post(`/studyspaces/:_id/comments`, async (req, res) => {
   if (req.body.comment) {
     await Comment.create({
       text: req.body.comment,
     });
   }
 
-  res.redirect(`pages/studyspaces/${req.params._id}`);
+  res.redirect(`/studyspaces/${req.params._id}`);
 });
 
 router.get(`/studyspaces/:_id/comments/:comment_id/edit`, async (req, res) => {
@@ -79,12 +79,12 @@ router.get(`/studyspaces/:_id/comments/:comment_id/edit`, async (req, res) => {
 
 router.put(`/studyspaces/:_id/comments/:comment_id`, async (req, res) => {
   await Comment.findByIdAndUpdate(req.params.comment_id, { text: comment });
-  res.redirect(`pages/studyspaces/${req.params._id}`);
+  res.redirect(`/studyspaces/${req.params._id}`);
 });
 
 router.delete(`/studyspaces/:_id/comments/:comment_id`, async (req, res) => {
   await Comment.findByIdAndDelete(req.params.comment_id);
-  res.redirect(`pages/studyspaces/${req.params._id}`);
+  res.redirect(`/studyspaces/${req.params._id}`);
 });
 
 router.get(`/*`, (req, res) => {
