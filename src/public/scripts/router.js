@@ -46,7 +46,7 @@ router.post(`/studyspaces`, async (req, res) => {
 router.get(`/studyspaces/:_id`, async (req, res) => {
   const studyspace = await StudySpace.findById(req.params._id);
   const studyspaces = await StudySpace.find({});
-  const comments = await Comment.find({});
+  const comments = await Comment.find({ studyspace: req.params._id });
 
   res.render(`pages/studyspace`, {
     studyspace,
@@ -58,6 +58,7 @@ router.get(`/studyspaces/:_id`, async (req, res) => {
 router.post(`/studyspaces/:_id/comments`, async (req, res) => {
   if (req.body.comment) {
     await Comment.create({
+      studyspace: req.params._id,
       text: req.body.comment,
     });
   }

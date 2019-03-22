@@ -80,10 +80,7 @@ li a {
 .new-comment-container {
   padding: 1rem;
   border: 1px solid black;
-  border-top-width: 1px;
-  border-right-width: 1px;
-  border-bottom-width: 0.25px;
-  border-left-width: 1px;
+  outline: none;
 }
 
 .form-container {
@@ -108,7 +105,8 @@ li a {
 
 .comments-container {
   border: solid black;
-  border-width: 0.25px 0.5px 0.5px 0.5px;
+  outline: none;
+  border-width: 0px 0.5px 0.5px 0.5px;
 }
 
 .single-comment-container {
