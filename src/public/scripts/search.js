@@ -2,14 +2,16 @@ const googleMapsClient = require('./client');
 const getStudySpaceDetailsAsync = require('./create');
 
 const searchForPlaceAsync = async (place) => {
-  if (place) {
-    const request = {
-      input: place,
-      inputtype: `textquery`,
-    };
+  const request = {
+    input: place,
+    inputtype: `textquery`,
+  };
+
+  const { json: { status, candidates } } = await googleMapsClient.findPlace(request).asPromise();
+  const [ firstCandidate ] = candidates;
   
-    const { place_id } = await googleMapsClient.findPlace(request).asPromise();
-    return getStudySpaceDetailsAsync(place_id);
+  if (status === `OK`) {
+    return getStudySpaceDetailsAsync(firstCandidate.place_id);
   }
 };
 
