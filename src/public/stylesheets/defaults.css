@@ -79,13 +79,19 @@ a {
   box-shadow: 0 4px rgba(0, 0, 0, 0.8);
 }
 
-.button-normal:hover {
+.button-normal:hover:enabled {
   top: 2px;
   box-shadow: 0 2px rgba(0, 0, 0, 0.8);
 }
 
-.button-normal:active {
+.button-normal:active:enabled {
   top: 4px;
+  box-shadow: none;
+}
+
+.button-normal:disabled {
+  opacity: 0.5;
+  color: gray;
   box-shadow: none;
 }
 
