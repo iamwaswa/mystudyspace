@@ -20,12 +20,16 @@ h2 {
 form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+input {
+  align-self: stretch;
 }
 
 input[type='text'],
 input[type='password'] {
   margin-bottom: 0.5rem;
-  width: 200px;
 }
 
 @media screen and (min-width: 768px) {
