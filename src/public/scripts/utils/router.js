@@ -5,12 +5,14 @@ const searchForPlaceAsync = require('../utils/search');
 
 const initializeRoutes = (router, passport) => {
 
+  const DEFAULT_FLASH_KEY = `default`;
+
   // =====================================
   // INDEX HOME ==========================
   // =====================================
 
   router.get(`/`, (req, res) => {
-    res.render(`pages/index`, { message: req.flash() });
+    return res.render(`pages/index`, { message: req.flash() });
   });
   
   // =====================================
@@ -18,7 +20,7 @@ const initializeRoutes = (router, passport) => {
   // =====================================
 
   router.get(`/signup`, (req, res) => {
-    res.render(`pages/signup`, { message: req.flash() });
+    return res.render(`pages/signup`, { message: req.flash() });
   });
 
   // =====================================
@@ -37,7 +39,7 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.get(`/login`, (req, res) => {
-    res.render(`pages/login`, { message: req.flash() });
+    return res.render(`pages/login`, { message: req.flash() });
   });
 
   // =====================================
@@ -56,9 +58,14 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.get(`/studyspaces`, async (req, res) => {
+    if (!req.user) {
+      req.flash(DEFAULT_FLASH_KEY, `You need an account to view the studyspaces`);
+      return res.redirect(`/signup`);
+    }
+
     try {
       const studyspaces = await StudySpace.find({});
-      res.render(`pages/studyspaces`, { studyspaces });
+      return res.render(`pages/studyspaces`, { studyspaces });
     } catch (error) {
       console.error(error);
     }
@@ -69,7 +76,12 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.get(`/studyspaces/new`, (req, res) => {
-    res.render(`pages/new`);
+    if (!req.user) {
+      req.flash(DEFAULT_FLASH_KEY, `You need an account to add a new studyspace`);
+      return res.redirect(`/signup`);
+    }
+
+    return res.render(`pages/new`);
   });
 
   // =====================================
@@ -77,6 +89,10 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.post(`/studyspaces`, async (req, res) => {
+    if (!req.user) {
+      req.flash(DEFAULT_FLASH_KEY, `You need an account to create a new studyspace`);
+      return res.redirect(`/signup`);
+    }
   
     try {
       let studyspace;
@@ -98,7 +114,7 @@ const initializeRoutes = (router, passport) => {
         });
       }
     
-      res.redirect(`/studyspaces`); 
+      return res.redirect(`/studyspaces`); 
     } catch (error) {
       console.error(error);
     }
@@ -109,12 +125,17 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.get(`/studyspaces/:_id`, async (req, res) => {
+    if (!req.user) {
+      req.flash(DEFAULT_FLASH_KEY, `You need an account to view a studyspace`);
+      return res.redirect(`/signup`);
+    }
+
     try {
       const studyspace = await StudySpace.findById(req.params._id);
       const studyspaces = await StudySpace.find({});
       const comments = await Comment.find({ studyspace: req.params._id });
     
-      res.render(`pages/studyspace`, {
+      return res.render(`pages/studyspace`, {
         studyspace,
         studyspaces,
         comments,
@@ -129,6 +150,11 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.post(`/studyspaces/:_id/comments`, async (req, res) => {
+    if (!req.user) {
+      req.flash(DEFAULT_FLASH_KEY, `You need an account to create a new comment`);
+      return res.redirect(`/signup`);
+    }
+
     try {
       if (req.body.comment) {
         await Comment.create({
@@ -137,7 +163,7 @@ const initializeRoutes = (router, passport) => {
         });
       }
     
-      res.redirect(`/studyspaces/${req.params._id}`);
+      return res.redirect(`/studyspaces/${req.params._id}`);
     } catch (error) {
       console.error(error);
     }
@@ -148,10 +174,15 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.get(`/studyspaces/:_id/comments/:comment_id/edit`, async (req, res) => {
+    if (!req.user) {
+      req.flash(DEFAULT_FLASH_KEY, `You need an account to edit a comment`);
+      return res.redirect(`/signup`);
+    }
+
     try {
       const { text } = await Comment.findById(req.params.comment_id);
     
-      res.render(`pages/editcomment`, {
+      return res.render(`pages/editcomment`, {
         studyspaceId: req.params._id,
         commentId: req.params.comment_id,
         comment: text,
@@ -166,9 +197,14 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.put(`/studyspaces/:_id/comments/:comment_id`, async (req, res) => {
+    if (!req.user) {
+      req.flash(DEFAULT_FLASH_KEY, `You need an account to update a comment`);
+      return res.redirect(`/signup`);
+    }
+
     try {
       await Comment.findOneAndUpdate({ _id: req.params.comment_id }, { text: req.body.comment });
-      res.redirect(`/studyspaces/${req.params._id}`);
+      return res.redirect(`/studyspaces/${req.params._id}`);
     } catch (error) {
       console.error(error);
     }
@@ -179,9 +215,14 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.delete(`/studyspaces/:_id/comments/:comment_id`, async (req, res) => {
+    if (!req.user) {
+      req.flash(DEFAULT_FLASH_KEY, `You need an account to delete a comment`);
+      return res.redirect(`/signup`);
+    }
+
     try {
       await Comment.findByIdAndDelete(req.params.comment_id);
-      res.redirect(`/studyspaces/${req.params._id}`);
+      return res.redirect(`/studyspaces/${req.params._id}`);
     } catch (error) {
       console.error(error);
     }
@@ -192,9 +233,8 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.get(`/*`, (req, res) => {
-    res.send(`The page you are looking for does not exist!`);
+    return res.redirect(`/`);
   });
 };
-
 
 module.exports = initializeRoutes;

@@ -10,7 +10,11 @@
       <p
         class='error-message'
       >
+      <% if (message.error) { %>
         <%= message.error %>
+      <% } else { %>
+        <%= message.default %>
+      <% } %>
       </p>
     </section>
   <% } %>
