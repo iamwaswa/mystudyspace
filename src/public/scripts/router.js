@@ -1,17 +1,20 @@
 const express = require('express');
+const passport = require('./utils/passport');
 const StudySpace = require('./models/studyspace');
 const Comment = require('./models/comment');
 const User = require('./models/user');
 const getPlaceDetailsAsync = require('./create');
 const searchForPlaceAsync = require('./search');
-const { signUpAsync, loginAsync } = require('./bcrypt');
+const { signUpAsync, loginAsync } = require('./utils/bcrypt');
 
 const router = express.Router();
 
 const FLASH_KEY = `info`;
 
 router.get(`/`, (req, res) => {
-  res.render(`pages/index`, { message: req.flash(FLASH_KEY) });
+  res.render(`pages/index`, { 
+    message: req.flash().success.length ? req.flash().success[0] : req.flash(FLASH_KEY),
+  });
 });
 
 router.get(`/signup`, (req, res) => {
@@ -22,12 +25,13 @@ router.post(`/signup`, async (req, res) => {
   try {
     const userFound = await User.findOne({ username: req.body.username });
     if (userFound) {
-      req.flash(FLASH_KEY, `Username already exists. Please choose a different one`);
+      req.flash(FLASH_KEY, `Username already exists. Please choose a different one!`);
       res.redirect(`/signup`);
       return;
     }
     
     await signUpAsync(req.body.username, req.body.password);
+    
     req.flash(FLASH_KEY, `Hello ${req.body.username}. You are signed up!`);
     res.redirect(`/`);
   } catch (error) {
@@ -36,31 +40,18 @@ router.post(`/signup`, async (req, res) => {
 });
 
 router.get(`/login`, (req, res) => {
-  res.render(`pages/login`, { message: req.flash(FLASH_KEY) });
+  res.render(`pages/login`, { 
+    message: req.flash(),
+  });
 });
 
-router.post(`/login`, async (req, res) => {
-  try {
-    const userFound = await User.findOne({ username: req.body.username });
-    if (!userFound) {
-      req.flash(FLASH_KEY, `Incorrect username. Please try again!`);
-      res.redirect(`/login`);
-      return;
-    }
-
-    const isValidated = await loginAsync(req.body.password, userFound.password);
-    if(isValidated) {
-      req.flash(FLASH_KEY, `Hello ${req.body.username}. You are logged in!`);
-      res.redirect(`/`);
-      return;
-    } 
-    
-    req.flash(FLASH_KEY, `Incorrect password. Please try again!`);
-    res.redirect(`/login`);
-  } catch (error) {
-    console.error(error);
-  }
-});
+router.post(`/login`, passport.authenticate(`local`, {
+    successRedirect: `/`,
+    failureRedirect: `/login`,
+    successFlash: true,
+    failureFlash: true,
+  })
+);
 
 router.get(`/studyspaces`, async (req, res) => {
   try {

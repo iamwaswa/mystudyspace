@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
 const router = require('./src/public/scripts/router');
 
 /**
@@ -25,6 +26,8 @@ app.use(methodOverride(`_method`));
 app.use(cookieParser(process.env.SECRET));
 app.use(session({ secret: process.env.SECRET , resave: false, saveUninitialized: false }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(router);
 
 app.listen(process.env.PORT, () => {
