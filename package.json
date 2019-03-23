@@ -25,7 +25,5 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
   },
-  "devDependencies": {
-    "morgan": "^1.9.1"
-  }
+  "devDependencies": {}
 }
