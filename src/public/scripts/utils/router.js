@@ -144,6 +144,8 @@ const initializeRoutes = (router, passport) => {
         usernames.push(username);
         return usernames;
       }, []);
+
+      // ! Date function implemented using date.js
       const dates = Array(comments.length).fill(`a year ago`);
 
       return res.render(`pages/studyspace`, {
