@@ -25,7 +25,7 @@ const initializeRoutes = (router, passport) => {
   // SIGNUP AUTHENTICATION ===============
   // =====================================
   
-  router.post(`/signup`, passport.authenticate(`local-login`, {
+  router.post(`/signup`, passport.authenticate(`local-signup`, {
     successRedirect: `/`,
     failureRedirect: `/signup`,
     successFlash: true,
