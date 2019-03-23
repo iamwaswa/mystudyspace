@@ -67,11 +67,6 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.get(`/studyspaces`, async (req, res) => {
-    if (!req.user) {
-      req.flash(DEFAULT_FLASH_KEY, `You need an account to view the studyspaces`);
-      return res.redirect(`/signup`);
-    }
-
     try {
       const studyspaces = await StudySpace.find({});
       return res.render(`pages/studyspaces`, { studyspaces });
