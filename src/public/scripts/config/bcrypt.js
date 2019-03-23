@@ -5,7 +5,7 @@ const saltRounds = 10;
 const signUpAsync = async (username, password) => {
   try {
     const encryptedPassword = await bcrypt.hash(password, saltRounds);
-    await User.create({
+    return await User.create({
       username,
       password: encryptedPassword,
     });
