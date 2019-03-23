@@ -123,6 +123,10 @@ li a {
   display: flex;
 }
 
+.remove-bottom-margin {
+  margin: 0;
+}
+
 .edit-button {
   margin-right: 0.5rem;
 }

@@ -140,6 +140,7 @@ const initializeRoutes = (router, passport) => {
       const comments = await Comment.find({ studyspace: req.params._id });
     
       return res.render(`pages/studyspace`, {
+        user: req.user,
         studyspace,
         studyspaces,
         comments,
@@ -162,6 +163,7 @@ const initializeRoutes = (router, passport) => {
     try {
       if (req.body.comment) {
         await Comment.create({
+          user: req.user._id,
           studyspace: req.params._id,
           text: req.body.comment,
         });

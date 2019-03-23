@@ -146,6 +146,7 @@
             <section
               class='single-comment-container'
             >
+            <% if (comment.user.equals(user._id)) { %>
               <p>
                 <%= comment.text %>
               </p>
@@ -170,6 +171,13 @@
                   />
                 </form>
               </section>
+              <% } else { %>
+                <p
+                  class='remove-bottom-margin'
+                >
+                  <%= comment.text %>
+                </p>
+              <% } %>
             </section>
           <% }); %>
           </section>
