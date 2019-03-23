@@ -146,9 +146,18 @@
             <section
               class='single-comment-container'
             >
-              <h3>
-                <%= authors[index] %>
-              </h3>
+              <section
+                class='header-section'
+              >
+                <h3>
+                  <%= authors[index] %>
+                </h3>
+                <h3
+                  class='date'
+                >
+                  <%= dates[index] %>
+                </h3>
+              </section>
             <% if (comment.user.equals(user._id)) { %>
               <p>
                 <%= comment.text %>

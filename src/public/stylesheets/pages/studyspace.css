@@ -115,8 +115,18 @@ li a {
   border-width: 0.5px 0.5px 0.25px 0.25px;
 }
 
+.header-section {
+  display: flex;
+  justify-content: space-between;
+}
+
 .single-comment-container h3 {
   margin: 0 0 0.5rem 0;
+}
+
+.date {
+  font-weight: normal;
+  font-size: 1rem;
 }
 
 .single-comment-container p {

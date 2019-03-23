@@ -144,6 +144,7 @@ const initializeRoutes = (router, passport) => {
         usernames.push(username);
         return usernames;
       }, []);
+      const dates = Array(comments.length).fill(`a year ago`);
 
       return res.render(`pages/studyspace`, {
         user: req.user,
@@ -151,6 +152,7 @@ const initializeRoutes = (router, passport) => {
         studyspaces,
         comments,
         authors,
+        dates,
       });
     } catch (error) {
       console.error(error);
