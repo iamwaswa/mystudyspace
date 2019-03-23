@@ -3,7 +3,16 @@ const getCurrentDate = () => {
 };
 
 /* 
+Just now
+30 seconds ago
 A minute ago
+2 minutes ago
+3 minutes ago
+4 minutes ago
+5 minutes ago
+10 minutes ago
+15 minutes ago
+20 minutes ago
 Half an hour ago
 An hour ago
 Yesterday
