@@ -3,10 +3,14 @@
 </head>
 <body>
   <main>
-  <% if (message.length) { %>
-    <section class='message-section below-nav'>
-      <p class='success-message'>
-        <%= message %>
+  <% if (Object.keys(message).length) { %>
+    <section
+      class='message-section'
+    >
+      <p
+        class='success-message'
+      >
+        <%= message.success %>
       </p>
     </section>
   <% } %>

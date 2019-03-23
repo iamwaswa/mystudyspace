@@ -1,4 +1,4 @@
-const googleMapsClient = require('./utils/client');
+const googleMapsClient = require('../config/client');
 const defaults = require('./defaults');
 
 const getPhotoAsync = 

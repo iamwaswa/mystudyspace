@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
-const router = require('./src/public/scripts/router');
+const router = require('./src/public/scripts/utils/router');
 
 /**
  * Mongoose Setup

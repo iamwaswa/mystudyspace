@@ -1,48 +1,39 @@
 const express = require('express');
-const passport = require('./utils/passport');
-const StudySpace = require('./models/studyspace');
-const Comment = require('./models/comment');
-const User = require('./models/user');
-const getPlaceDetailsAsync = require('./create');
-const searchForPlaceAsync = require('./search');
-const { signUpAsync, loginAsync } = require('./utils/bcrypt');
+const passport = require('../config/passport');
+const StudySpace = require('../models/studyspace');
+const Comment = require('../models/comment');
+const User = require('../models/user');
+const getPlaceDetailsAsync = require('../utils/create');
+const searchForPlaceAsync = require('../utils/search');
+const { signUpAsync } = require('../config/bcrypt');
 
 const router = express.Router();
 
-const FLASH_KEY = `info`;
-
 router.get(`/`, (req, res) => {
-  res.render(`pages/index`, { 
-    message: req.flash().success.length ? req.flash().success[0] : req.flash(FLASH_KEY),
-  });
+  res.render(`pages/index`, { message: req.flash() });
 });
 
 router.get(`/signup`, (req, res) => {
-  res.render(`pages/signup`, { message: req.flash(FLASH_KEY) });
+  res.render(`pages/signup`, { message: req.flash() });
 });
 
 router.post(`/signup`, async (req, res) => {
   try {
     const userFound = await User.findOne({ username: req.body.username });
     if (userFound) {
-      req.flash(FLASH_KEY, `Username already exists. Please choose a different one!`);
+      req.flash().error = `Username already exists. Please choose a different one!`;
       res.redirect(`/signup`);
       return;
     }
-    
+
     await signUpAsync(req.body.username, req.body.password);
-    
-    req.flash(FLASH_KEY, `Hello ${req.body.username}. You are signed up!`);
-    res.redirect(`/`);
   } catch (error) {
     console.error(error);
   }
 });
 
 router.get(`/login`, (req, res) => {
-  res.render(`pages/login`, { 
-    message: req.flash(),
-  });
+  res.render(`pages/login`, { message: req.flash() });
 });
 
 router.post(`/login`, passport.authenticate(`local`, {
