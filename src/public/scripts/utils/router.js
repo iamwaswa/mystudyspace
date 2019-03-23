@@ -3,6 +3,7 @@ const Comment = require('../models/comment');
 const User = require('../models/user');
 const getPlaceDetailsAsync = require('../utils/create');
 const searchForPlaceAsync = require('../utils/search');
+const getTimeDescription = require('../utils/date');
 
 const initializeRoutes = (router, passport) => {
 
@@ -144,9 +145,9 @@ const initializeRoutes = (router, passport) => {
         usernames.push(username);
         return usernames;
       }, []);
-
-      // ! Date function implemented using date.js
-      const dates = Array(comments.length).fill(`a year ago`);
+      const dates = comments.map(({ created }) => {
+        return getTimeDescription(created);
+      })
 
       return res.render(`pages/studyspace`, {
         user: req.user,
