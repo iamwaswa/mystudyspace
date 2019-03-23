@@ -27,7 +27,31 @@ router.post(`/signup`, async (req, res) => {
     }
     
     await User.create({ username: req.body.username, password: req.body.password });
-    req.flash(FLASH_KEY, `Hello ${req.body.username}!`);
+    req.flash(FLASH_KEY, `Hello ${req.body.username}. You are signed up!`);
+    res.redirect(`/`);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+router.get(`/login`, (req, res) => {
+  res.render(`pages/login`, { message: req.flash(FLASH_KEY) });
+});
+
+router.post(`/login`, async (req, res) => {
+  try {
+    const userFound = await User.findOne({
+      username: req.body.username,
+      password: req.body.password
+    });
+
+    if (!userFound) {
+      req.flash(FLASH_KEY, `Incorrect username and password. Please try again`);
+      res.redirect(`/login`);
+      return;
+    }
+    
+    req.flash(FLASH_KEY, `Hello ${req.body.username}. You are logged in!`);
     res.redirect(`/`);
   } catch (error) {
     console.error(error);

@@ -3,6 +3,13 @@
 </head>
 <body>
   <main>
+  <% if (message.length) { %>
+    <section class='message-section below-nav'>
+      <p class='success-message'>
+        <%= message %>
+      </p>
+    </section>
+  <% } %>
     <% include ../partials/navigation %>
     <section
       class='content'
@@ -18,5 +25,11 @@
       </a>
     </section>
   </main>
+  <script
+    async
+    defer
+    src='/scripts/pages/auth.js'
+  >
+  </script>
 </body>
 </html>

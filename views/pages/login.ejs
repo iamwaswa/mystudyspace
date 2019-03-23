@@ -1,15 +1,19 @@
 <% include ../partials/header %>
-  <link type='text/css' rel='stylesheet' href='/stylesheets/login.css'>
+  <link type='text/css' rel='stylesheet' href='/stylesheets/auth.css'>
 </head>
 <body>
   <main>
+  <% if (message.length) { %>
     <section
-      class='message'
+      class='message-section'
     >
-      <p>
+      <p
+        class='error-message'
+      >
         <%= message %>
       </p>
     </section>
+  <% } %>
     <section 
       class='container'
     >
@@ -23,12 +27,19 @@
         <input 
           class='input-normal'
           type='text'
+          name='username'
           placeholder='Username'
+          autocomplete='username'
+          autofocus
+          required
         />
         <input 
           class='input-normal'
           type='password'
+          name='password'
           placeholder='Password'
+          autocomplete='current-password'
+          required
         />
         <input 
           class='button-normal'
@@ -38,4 +49,10 @@
       </form>
     </section> 
   </main>
+  <script
+    async
+    defer
+    src='/scripts/pages/auth.js'
+  >
+  </script>
 </body>

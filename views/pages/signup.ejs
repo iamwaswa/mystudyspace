@@ -1,5 +1,5 @@
 <% include ../partials/header %>
-  <link type='text/css' rel='stylesheet' href='/stylesheets/signup.css'>
+  <link type='text/css' rel='stylesheet' href='/stylesheets/auth.css'>
 </head>
 <body>
   <main>
@@ -7,7 +7,9 @@
     <section
       class='message-section'
     >
-      <p>
+      <p
+        class='error-message'
+      >
         <%= message %>
       </p>
     </section>
@@ -50,7 +52,7 @@
   <script
     async
     defer
-    src='/scripts/pages/signup.js'
+    src='/scripts/pages/auth.js'
   >
   </script>
 </body>

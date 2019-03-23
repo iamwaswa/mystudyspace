@@ -2,33 +2,6 @@ main {
   grid-template-rows: auto;
 }
 
-.add-row {
-  grid-template-rows: 68px auto;
-}
-
-.shift-up {
-  transform: translateY(-68px);
-}
-
-.message-section {
-  padding: 1rem;
-  opacity: 0;
-}
-
-.fade-in {
-  transition: opacity 300ms ease-in;
-  opacity: 1;
-}
-
-.message-section p {
-  margin: 0;
-  padding: 0.5rem;
-  border: 1px solid rgb(201, 23, 23);
-  border-radius: 5px;
-  background-color: rgba(201, 23, 23, 0.5);
-  color: rgb(201, 23, 23);
-}
-
 .container {
   display: flex;
   flex-direction: column;

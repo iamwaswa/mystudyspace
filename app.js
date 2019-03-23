@@ -23,7 +23,7 @@ app.use(express.static(`${__dirname}/src/public`));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride(`_method`));
 app.use(cookieParser(process.env.SECRET));
-app.use(session({ secret: process.env.SECRET }));
+app.use(session({ secret: process.env.SECRET , resave: false, saveUninitialized: false }));
 app.use(flash());
 app.use(router);
 
