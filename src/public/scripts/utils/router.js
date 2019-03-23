@@ -1,5 +1,6 @@
 const StudySpace = require('../models/studyspace');
 const Comment = require('../models/comment');
+const User = require('../models/user');
 const getPlaceDetailsAsync = require('../utils/create');
 const searchForPlaceAsync = require('../utils/search');
 
@@ -138,12 +139,18 @@ const initializeRoutes = (router, passport) => {
       const studyspace = await StudySpace.findById(req.params._id);
       const studyspaces = await StudySpace.find({});
       const comments = await Comment.find({ studyspace: req.params._id });
-    
+      const authors = await comments.reduce(async (usernames, comment) => {
+        const { username } = await User.findById(comment.user);
+        usernames.push(username);
+        return usernames;
+      }, []);
+
       return res.render(`pages/studyspace`, {
         user: req.user,
         studyspace,
         studyspaces,
         comments,
+        authors,
       });
     } catch (error) {
       console.error(error);

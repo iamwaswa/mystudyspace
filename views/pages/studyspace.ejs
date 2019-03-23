@@ -142,10 +142,13 @@
           <section
             class='comments-container'
           >
-          <% comments.map((comment) => { %>
+          <% comments.map((comment, index) => { %>
             <section
               class='single-comment-container'
             >
+              <h3>
+                <%= authors[index] %>
+              </h3>
             <% if (comment.user.equals(user._id)) { %>
               <p>
                 <%= comment.text %>

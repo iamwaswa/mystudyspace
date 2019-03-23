@@ -115,6 +115,10 @@ li a {
   border-width: 0.5px 0.5px 0.25px 0.25px;
 }
 
+.single-comment-container h3 {
+  margin: 0 0 0.5rem 0;
+}
+
 .single-comment-container p {
   margin-top: 0;
 }
