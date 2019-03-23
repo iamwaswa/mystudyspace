@@ -177,7 +177,7 @@ const initializeRoutes = (router, passport) => {
           user: req.user._id,
           studyspace: req.params._id,
           text: req.body.comment,
-          date: Date.now(),
+          created: Date.now(),
         });
       }
     
