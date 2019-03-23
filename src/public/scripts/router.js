@@ -4,6 +4,7 @@ const Comment = require('./models/comment');
 const User = require('./models/user');
 const getPlaceDetailsAsync = require('./create');
 const searchForPlaceAsync = require('./search');
+const { signUpAsync, loginAsync } = require('./bcrypt');
 
 const router = express.Router();
 
@@ -26,7 +27,7 @@ router.post(`/signup`, async (req, res) => {
       return;
     }
     
-    await User.create({ username: req.body.username, password: req.body.password });
+    await signUpAsync(req.body.username, req.body.password);
     req.flash(FLASH_KEY, `Hello ${req.body.username}. You are signed up!`);
     res.redirect(`/`);
   } catch (error) {
@@ -40,19 +41,22 @@ router.get(`/login`, (req, res) => {
 
 router.post(`/login`, async (req, res) => {
   try {
-    const userFound = await User.findOne({
-      username: req.body.username,
-      password: req.body.password
-    });
-
+    const userFound = await User.findOne({ username: req.body.username });
     if (!userFound) {
-      req.flash(FLASH_KEY, `Incorrect username and password. Please try again`);
+      req.flash(FLASH_KEY, `Incorrect username. Please try again!`);
       res.redirect(`/login`);
       return;
     }
+
+    const isValidated = await loginAsync(req.body.password, userFound.password);
+    if(isValidated) {
+      req.flash(FLASH_KEY, `Hello ${req.body.username}. You are logged in!`);
+      res.redirect(`/`);
+      return;
+    } 
     
-    req.flash(FLASH_KEY, `Hello ${req.body.username}. You are logged in!`);
-    res.redirect(`/`);
+    req.flash(FLASH_KEY, `Incorrect password. Please try again!`);
+    res.redirect(`/login`);
   } catch (error) {
     console.error(error);
   }
