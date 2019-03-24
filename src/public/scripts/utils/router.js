@@ -7,6 +7,8 @@ const getTimeDescription = require('../utils/date');
 
 const initializeRoutes = (router, passport) => {
 
+  const SUCCESS_FLASH_KEY = `success`;
+  const ERROR_FLASH_KEY = `error`;
   const DEFAULT_FLASH_KEY = `default`;
 
   // =====================================
@@ -22,6 +24,14 @@ const initializeRoutes = (router, passport) => {
   // =====================================
 
   router.get(`/signup`, (req, res) => {
+    if (req.user) {
+      req.flash(
+        SUCCESS_FLASH_KEY, 
+        `You don't need to sign up. You're already logged in as ${req.user.username}`
+      );
+      return res.redirect(`/`);
+    }
+
     return res.render(`pages/signup`, { message: req.flash() });
   });
 
@@ -41,6 +51,14 @@ const initializeRoutes = (router, passport) => {
   // =====================================
   
   router.get(`/login`, (req, res) => {
+    if (req.user) {
+      req.flash(
+        SUCCESS_FLASH_KEY, 
+        `You don't need to login. You're already logged in as ${req.user.username}`
+      );
+      return res.redirect(`/`);
+    }
+
     return res.render(`pages/login`, { message: req.flash() });
   });
 
@@ -60,7 +78,13 @@ const initializeRoutes = (router, passport) => {
   // =====================================
 
   router.get(`/logout`, (req, res) => {
+    if (!req.user) {
+      req.flash(ERROR_FLASH_KEY, `You are not logged in!`);
+      return res.redirect(`/login`);
+    }
+    
     req.logout();
+    req.flash(SUCCESS_FLASH_KEY, `You have been logged out`);
     return res.redirect(`/`);
   });
 
