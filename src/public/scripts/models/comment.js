@@ -3,11 +3,8 @@ const mongoose = require('mongoose');
 const CommentSchema = new mongoose.Schema({
   text: String,
   created: Number,
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: `users`,
-  },
-  studyspace: {
+  username: String,
+  studyspaceId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: `studyspaces`,
   },

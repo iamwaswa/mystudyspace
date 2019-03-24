@@ -140,22 +140,21 @@ const initializeRoutes = (router, passport) => {
       const studyspace = await StudySpace.findById(req.params._id);
       const studyspaces = await StudySpace.find({});
       const comments = await Comment.find({ studyspace: req.params._id });
-      const authors = await comments.reduce(async (usernames, comment) => {
-        const { username } = await User.findById(comment.user);
-        usernames.push(username);
-        return usernames;
-      }, []);
       const dates = comments.map(({ created }) => {
         return getTimeDescription(created);
-      })
+      });
+
+      const authors = comments.map((comment) => {
+        return comment.user;
+      });
 
       return res.render(`pages/studyspace`, {
         user: req.user,
         studyspace,
         studyspaces,
         comments,
-        authors,
         dates,
+        authors,
       });
     } catch (error) {
       console.error(error);
