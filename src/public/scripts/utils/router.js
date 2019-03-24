@@ -143,9 +143,8 @@ const initializeRoutes = (router, passport) => {
       const dates = comments.map(({ created }) => {
         return getTimeDescription(created);
       });
-
       const authors = comments.map((comment) => {
-        return comment.user;
+        return comment.author;
       });
 
       return res.render(`pages/studyspace`, {
@@ -173,9 +172,10 @@ const initializeRoutes = (router, passport) => {
 
     try {
       if (req.body.comment) {
+        const { username } = await User.findById(req.user._id);
         await Comment.create({
-          user: req.user._id,
-          studyspace: req.params._id,
+          author: username,
+          studyspaceId: req.params._id,
           text: req.body.comment,
           created: Date.now(),
         });
