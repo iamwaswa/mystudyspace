@@ -158,7 +158,7 @@
                   <%= dates[index] %>
                 </h3>
               </section>
-            <% if (comment.user.equals(user._id)) { %>
+            <% if (comment.author === user.username) { %>
               <p>
                 <%= comment.text %>
               </p>

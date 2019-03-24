@@ -139,7 +139,7 @@ const initializeRoutes = (router, passport) => {
     try {
       const studyspace = await StudySpace.findById(req.params._id);
       const studyspaces = await StudySpace.find({});
-      const comments = await Comment.find({ studyspace: req.params._id });
+      const comments = await Comment.find({ studyspaceId: req.params._id });
       const dates = comments.map(({ created }) => {
         return getTimeDescription(created);
       });
