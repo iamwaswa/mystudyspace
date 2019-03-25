@@ -1,16 +1,24 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: auto;
-  margin: auto;
+  margin: 1rem auto;
   padding: 1rem;
+}
+
+.use-current-location {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .use-entered-location {
   border: 1px solid black;
-  margin-bottom: 2rem;
   padding: 1rem;
 }
 
@@ -25,12 +33,4 @@ form {
 
 input[type='text'] {
   margin-bottom: 1rem;
-}
-
-.use-current-location {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  text-align: center;
-  padding: 1rem;
 }

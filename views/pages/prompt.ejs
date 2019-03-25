@@ -8,6 +8,25 @@
       class='container'
     >
       <section
+      class='use-current-location'
+      >
+        <p>
+          User your current location
+        </p>
+        <p>
+          (Requires using device location)
+        </p>
+        <a
+          class='button-normal'
+          href='/studyspaces/new'
+          >
+          Use
+        </a>
+      </section>
+      <p>
+        OR
+      </p>
+      <section
         class='use-entered-location'
       >
         <p>
@@ -29,19 +48,22 @@
             class='input-normal'
             type='text' 
             placeholder='Enter your postal code here...' 
-            name='postal' 
+            name='postal'
+            autocomplete='shipping postal-code' 
           />
           <input 
             class='input-normal'
             type='text' 
             placeholder='Enter your city here...' 
             name='city' 
+            autocomplete='shipping locality'
           />
           <input 
             class='input-normal'
             type='text' 
             placeholder='Enter your province here...' 
             name='province' 
+            autocomplete='shipping region'
           />
           <input 
             class='button-normal'
@@ -49,22 +71,6 @@
             value='Submit' 
           />
         </form>
-      </section>
-      <section
-        class='use-current-location'
-      >
-        <p>
-          User your current location
-        </p>
-        <p>
-          (Requires using device location)
-        </p>
-        <a
-          class='button-normal'
-          href='/studyspaces/new'
-        >
-          Use
-        </a>
       </section>
     </section>
   </main>
