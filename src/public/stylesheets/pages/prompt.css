@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin: auto;
+  padding: 1rem;
+}
+
+.use-entered-location {
+  border: 1px solid black;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+p {
+  margin-top: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type='text'] {
+  margin-bottom: 1rem;
+}
+
+.use-current-location {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  text-align: center;
+  padding: 1rem;
+}

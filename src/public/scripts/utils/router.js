@@ -101,14 +101,24 @@ const initializeRoutes = (router, passport) => {
     }
   });
 
+  router.get(`/prompt`, (req, res) => {
+    res.render(`pages/prompt`);
+  });
+
+  router.post(`/prompt`, (req, res) => {
+    const physicalAddress = req.body.physical;
+    const postalCode = req.body.postal || ``;
+    const city = req.body.city || ``;
+    const province = req.body.province || ``;
+    const country = `Canada`;
+    // ! Fetch location using address
+    res.redirect(`/studyspaces/new`);
+  });
+
   // =====================================
   // NEW STUDYSPACE ======================
   // =====================================
   
-  // ! Implement screen before this to give user
-  // ! Option 1: Enter your current address include:
-  // !! physical address, postal code, city, province, Canada
-  // ! Option 2: User current location (HTML5 Geolocation)
   router.get(`/studyspaces/new`, (req, res) => {
     if (!req.user) {
       req.flash(DEFAULT_FLASH_KEY, `You need an account to add a new studyspace`);
