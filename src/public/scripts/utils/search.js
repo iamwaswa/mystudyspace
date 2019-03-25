@@ -2,17 +2,63 @@ const googleMapsClient = require('../config/client');
 const getStudySpaceDetailsAsync = require('./create');
 
 const searchForPlaceAsync = async (place) => {
-  const request = {
-    input: place,
-    inputtype: `textquery`,
-  };
-
-  const { json: { status, candidates } } = await googleMapsClient.findPlace(request).asPromise();
-  const [ firstCandidate ] = candidates;
+  try {
+    const request = {
+      input: place,
+      inputtype: `textquery`,
+    };
   
-  if (status === `OK`) {
-    return getStudySpaceDetailsAsync(firstCandidate.place_id);
+    const { json: { status, candidates } } = await googleMapsClient.findPlace(request).asPromise();
+    
+    if (status === `OK`) {
+      const [ firstCandidate ] = candidates;
+      return getStudySpaceDetailsAsync(firstCandidate.place_id);
+    }
+  } catch (error) {
+    console.error(error);
   }
 };
 
-module.exports = searchForPlaceAsync;
+const geolocateAddressAsync = async (address) => {
+  try {
+    const formattedAddress = formatAddress(address);
+    const request = {
+      address: formattedAddress,
+    };
+  
+    const { json: { status, results } } = await googleMapsClient.geocode(request).asPromise();
+    
+    if (status === `OK`) {
+      const [ firstResult ] = results;
+      const { geometry: { location } } = firstResult;
+      return location;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const formatAddress = (address) => {
+  let result = address.streetAddress;
+
+  if (address.city) {
+    result += `, ${address.city}`;
+  }
+
+  if (address.province) {
+    result += `, ${address.province}`;
+  }
+
+  if (address.postalCode) {
+    result += ` ${address.postalCode}`;
+  }
+
+  result += `, ${address.country}`;
+
+  return result;
+};
+
+module.exports = {
+  searchForPlaceAsync,
+  geolocateAddressAsync,
+};

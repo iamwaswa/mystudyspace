@@ -2,7 +2,7 @@ const StudySpace = require('../models/studyspace');
 const Comment = require('../models/comment');
 const User = require('../models/user');
 const getPlaceDetailsAsync = require('../utils/create');
-const searchForPlaceAsync = require('../utils/search');
+const { searchForPlaceAsync, geolocateAddressAsync } = require('../utils/search');
 const getTimeDescription = require('../utils/date');
 
 const initializeRoutes = (router, passport) => {
@@ -101,17 +101,27 @@ const initializeRoutes = (router, passport) => {
     }
   });
 
+  // =====================================
+  // INDEX PROMPT ========================
+  // =====================================
+
   router.get(`/prompt`, (req, res) => {
     res.render(`pages/prompt`);
   });
 
-  router.post(`/prompt`, (req, res) => {
-    const physicalAddress = req.body.physical;
-    const postalCode = req.body.postal || ``;
-    const city = req.body.city || ``;
-    const province = req.body.province || ``;
-    const country = `Canada`;
-    // ! Fetch location using address
+  // =====================================
+  // PROMPT CONFIRMATION =================
+  // =====================================
+
+  router.post(`/prompt`, async (req, res) => {
+    const address = {};
+    address.streetAddress = req.body.streetAddress;
+    address.postalCode = req.body.postalCode || ``;
+    address.city = req.body.city || ``;
+    address.province = req.body.province || ``;
+    address.country = `Canada`;
+    const position = await geolocateAddressAsync(address);
+    console.log(JSON.stringify(position));
     res.redirect(`/studyspaces/new`);
   });
 
