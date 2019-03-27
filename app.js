@@ -46,13 +46,13 @@ app.use(passport.session());
 // ROUTES SETUP ========================
 // =====================================
 
-app.use(`/`, commentRoutes);
-app.use(`/`, homeRoutes);
-app.use(`/`, notFoundRoutes);
-app.use(`/`, promptRoutes);
-app.use(`/`, studyspaceRoutes);
-app.use(`/`, studyspacesRoutes);
-app.use(`/`, initializeAuthRoutes(passport));
+app.use(commentRoutes);
+app.use(homeRoutes);
+app.use(notFoundRoutes);
+app.use(promptRoutes);
+app.use(studyspaceRoutes);
+app.use(studyspacesRoutes);
+app.use(initializeAuthRoutes(passport));
 
 app.listen(process.env.PORT, () => {
   console.log(`MyStudySpace is running on port ${process.env.PORT}.
