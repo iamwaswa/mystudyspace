@@ -7,7 +7,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const initializePassport = require('./src/public/scripts/config/passport');
-const initializeRouter = require('./src/public/scripts/utils/router');
+const { initializeRoutes } = require('./src/public/scripts/routes/router');
 
 // =====================================
 // MONGOOSE SETUP ======================
@@ -42,7 +42,7 @@ app.use(passport.session());
 
 const router = express.Router();
 
-initializeRouter(router, passport);
+initializeRoutes(router, passport);
 
 app.use(router);
 
