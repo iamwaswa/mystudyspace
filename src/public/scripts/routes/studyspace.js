@@ -15,7 +15,7 @@ studyspaceRoutes.get(`/studyspaces/new`, (req, res) => {
     return res.redirect(`/signup`);
   }
 
-  return res.render(`pages/new`);
+  return res.render(`pages/newcurrent`);
 });
 
 // =====================================
