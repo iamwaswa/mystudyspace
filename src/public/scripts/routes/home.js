@@ -1,13 +1,12 @@
-const initializeHomeRoutes = (router) => {
-  // =====================================
-  // HOME ================================
-  // =====================================
+const homeRoutes = require(`express`).Router();
 
-  router.get(`/`, (req, res) => {
-    return res.render(`pages/index`, {
-      message: req.flash()
-    });
+// =====================================
+// HOME ================================
+// =====================================
+homeRoutes.get(`/`, (req, res) => {
+  return res.render(`pages/index`, {
+    message: req.flash()
   });
-};
+});
 
-module.exports = initializeHomeRoutes;
+module.exports = homeRoutes;

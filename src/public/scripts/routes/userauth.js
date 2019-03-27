@@ -1,11 +1,11 @@
-const { SUCCESS_FLASH_KEY, ERROR_FLASH_KEY } = require('./router');
+const userAuthenticationRoutes = require(`express`).Router();
+const { SUCCESS_FLASH_KEY, ERROR_FLASH_KEY } = require(`../config/router`);
 
-const initializeUserAuthenticationRoutes = (router, passport) => {
+const initializeAuthRoutes = (passport) => {
   // =====================================
   // SIGNUP ==============================
   // =====================================
-
-  router.get(`/signup`, (req, res) => {
+  userAuthenticationRoutes.get(`/signup`, (req, res) => {
     if (req.user) {
       req.flash(
         SUCCESS_FLASH_KEY,
@@ -22,8 +22,7 @@ const initializeUserAuthenticationRoutes = (router, passport) => {
   // =====================================
   // SIGNUP AUTHENTICATION ===============
   // =====================================
-
-  router.post(`/signup`, passport.authenticate(`local-signup`, {
+  userAuthenticationRoutes.post(`/signup`, passport.authenticate(`local-signup`, {
     successRedirect: `/`,
     failureRedirect: `/signup`,
     successFlash: true,
@@ -33,8 +32,7 @@ const initializeUserAuthenticationRoutes = (router, passport) => {
   // =====================================
   // LOGIN ===============================
   // =====================================
-
-  router.get(`/login`, (req, res) => {
+  userAuthenticationRoutes.get(`/login`, (req, res) => {
     if (req.user) {
       req.flash(
         SUCCESS_FLASH_KEY,
@@ -51,8 +49,7 @@ const initializeUserAuthenticationRoutes = (router, passport) => {
   // =====================================
   // LOGIN AUTHENTICATION ================
   // =====================================
-
-  router.post(`/login`, passport.authenticate(`local-login`, {
+  userAuthenticationRoutes.post(`/login`, passport.authenticate(`local-login`, {
     successRedirect: `/`,
     failureRedirect: `/login`,
     successFlash: true,
@@ -62,8 +59,7 @@ const initializeUserAuthenticationRoutes = (router, passport) => {
   // =====================================
   // LOGOUT ==============================
   // =====================================
-
-  router.get(`/logout`, (req, res) => {
+  userAuthenticationRoutes.get(`/logout`, (req, res) => {
     if (!req.user) {
       req.flash(ERROR_FLASH_KEY, `You are not logged in!`);
       return res.redirect(`/login`);
@@ -73,6 +69,8 @@ const initializeUserAuthenticationRoutes = (router, passport) => {
     req.flash(SUCCESS_FLASH_KEY, `You have been logged out`);
     return res.redirect(`/`);
   });
+
+  return userAuthenticationRoutes;
 };
 
-module.exports = initializeUserAuthenticationRoutes;
+module.exports = initializeAuthRoutes;

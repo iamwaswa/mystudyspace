@@ -1,5 +1,5 @@
-const googleMapsClient = require('../config/client');
-const defaults = require('./defaults');
+const googleMapsClient = require(`../config/googlemapsclient`);
+const defaults = require(`./defaults`);
 
 const getPhotoAsync = 
 async ({ photo_reference, height, width }) => {

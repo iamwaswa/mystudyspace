@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/user');
+const bcrypt = require(`bcrypt`);
+const User = require(`../models/user`);
 const saltRounds = 10;
 
 const signUpAsync = async (username, password) => {

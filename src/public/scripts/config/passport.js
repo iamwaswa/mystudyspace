@@ -1,6 +1,6 @@
-const passportLocal = require('passport-local');
-const User = require('../models/user');
-const { signUpAsync, loginAsync } = require('./bcrypt');
+const passportLocal = require(`passport-local`);
+const User = require(`../models/user`);
+const { signUpAsync, loginAsync } = require(`./bcrypt`);
 
 const initializePassport = (passport) => {
 

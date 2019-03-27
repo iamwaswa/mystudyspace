@@ -1,5 +1,5 @@
-const googleMapsClient = require('../config/client');
-const getStudySpaceDetailsAsync = require('./create');
+const googleMapsClient = require(`../config/googlemapsclient`);
+const getStudySpaceDetailsAsync = require(`./create`);
 
 const searchForPlaceAsync = async (place) => {
   try {

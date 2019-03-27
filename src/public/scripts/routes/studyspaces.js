@@ -1,20 +1,18 @@
-const StudySpace = require('../models/studyspace');
+const studyspacesRoutes = require(`express`).Router();
+const StudySpace = require(`../models/studyspace`);
 
-const initializeStudySpacesRoutes = (router) => {
-  // =====================================
-  // STUDYSPACES ===================
-  // =====================================
+// =====================================
+// STUDYSPACES ===================
+// =====================================
+studyspacesRoutes.get(`/studyspaces`, async (req, res) => {
+  try {
+    const studyspaces = await StudySpace.find({});
+    return res.render(`pages/studyspaces`, {
+      studyspaces
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
 
-  router.get(`/studyspaces`, async (req, res) => {
-    try {
-      const studyspaces = await StudySpace.find({});
-      return res.render(`pages/studyspaces`, {
-        studyspaces
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  });
-};
-
-module.exports = initializeStudySpacesRoutes;
+module.exports = studyspacesRoutes;
