@@ -19,8 +19,9 @@ promptRoutes.post(`/prompt`, async (req, res) => {
   address.province = req.body.province || ``;
   address.country = `Canada`;
   const position = await geolocateAddressAsync(address);
+  const stringifyPosition = JSON.stringify(position);
 
-  res.redirect(`/studyspaces/new`);
+  res.redirect(`/studyspaces/new/${stringifyPosition}`);
 });
 
 module.exports = promptRoutes;

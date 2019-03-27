@@ -54,6 +54,19 @@ studyspaceRoutes.post(`/studyspaces`, async (req, res) => {
 });
 
 // =====================================
+// NEW PARAMS STUDYSPACE ===============
+// =====================================
+studyspaceRoutes.get(`/studyspaces/new/:position`, (req, res) => {
+  if (!req.user) {
+    req.flash(DEFAULT_FLASH_KEY, `You need an account to add a new studyspace`);
+    return res.redirect(`/signup`);
+  }
+
+  const position = JSON.parse(req.params.position);
+  return res.render(`pages/newentered`, { position });
+});
+
+// =====================================
 // SHOW STUDYSPACE =====================
 // =====================================
 studyspaceRoutes.get(`/studyspaces/:_id`, async (req, res) => {
