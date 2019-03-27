@@ -1,4 +1,4 @@
-const zoomLevel = 9;
+const zoomLevel = 12;
 const radiusSize = 100;
 const content = {
   userPosition: ``,
