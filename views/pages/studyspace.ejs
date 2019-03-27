@@ -75,7 +75,10 @@
                     <%= studyspace.website %>
                   </span>
                 <% } else { %>
-                  <a href='/' target='_blank'>
+                  <a 
+                    href='<% studyspace.website %>' 
+                    target='_blank'
+                  >
                     <%= studyspace.website %>
                   </a>
                 <% } %>
@@ -90,14 +93,16 @@
               <p>
                 Rating: <%= studyspace.rating %> / 5
               </p>
-              <p>
-                <a
-                  href='/'
-                  target='_blank'
-                >
-                  Find on Google Maps
-                </a>
-              </p>
+              <% if (studyspace.url !== 'N/A') { %>
+                <p>
+                  <a
+                    href='<%= studyspace.url %>'
+                    target='_blank'
+                  >
+                    Find on Google Maps
+                  </a>
+                </p>
+              <% } %>
             </section>
           </section>
         </section>

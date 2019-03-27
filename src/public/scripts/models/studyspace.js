@@ -7,6 +7,7 @@ const StudySpaceSchema = new mongoose.Schema({
   postalCode: String,
   city: String,
   province: String,
+  url: String,
   website: String,
   phone: String,
   image: String,

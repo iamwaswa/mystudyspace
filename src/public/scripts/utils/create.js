@@ -58,6 +58,7 @@ const createStudySpaceObjectAsync = async (result) => {
     postalCode: addressObject[`postal-code`] ? addressObject[`postal-code`] : defaults[`postalCode`],
     city: addressObject[`locality`] ? addressObject[`locality`] : defaults[`city`],
     province: addressObject[`region`] ? addressObject[`region`] : defaults[`province`],
+    url: result.url ? result.url : defaults[`url`],
     website: result.website ? result.website : defaults[`website`],
     phone: result.formatted_phone_number ? result.formatted_phone_number : defaults[`phone`],
     image: photoUrl ? photoUrl : defaults[`image`],
