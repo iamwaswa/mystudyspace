@@ -17,6 +17,17 @@ h2 {
   margin-top: 0;
 }
 
+@keyframes fade-in {
+  100% {
+    opacity: 1;
+  }
+}
+
+.message-section {
+  opacity: 0;
+  animation: fade-in 300ms ease-in 0 1 normal forwards;
+}
+
 form {
   display: flex;
   flex-direction: column;
