@@ -13,6 +13,14 @@ main {
   padding: 1rem;
 }
 
+.message-section {
+  animation-name: fadein;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+
 h2 {
   margin-top: 0;
 }

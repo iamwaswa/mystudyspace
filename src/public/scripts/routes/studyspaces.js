@@ -2,7 +2,7 @@ const studyspacesRoutes = require(`express`).Router();
 const StudySpace = require(`../models/studyspace`);
 
 // =====================================
-// STUDYSPACES ===================
+// STUDYSPACES =========================
 // =====================================
 studyspacesRoutes.get(`/studyspaces`, async (req, res) => {
   try {

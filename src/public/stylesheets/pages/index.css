@@ -2,15 +2,12 @@
   top: 50px;
 }
 
-@keyframes fade-in {
-  100% {
-    opacity: 1;
-  }
-}
-
 .message-section {
-  opacity: 0;
-  animation: fade-in 300ms ease-in 0 1 normal forwards;
+  animation-name: fadein;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
 }
 
 .content {

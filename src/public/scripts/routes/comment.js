@@ -41,9 +41,7 @@ commentRoutes.get(`/studyspaces/:_id/comments/:comment_id/edit`, async (req, res
   }
 
   try {
-    const {
-      text
-    } = await Comment.findById(req.params.comment_id);
+    const { text } = await Comment.findById(req.params.comment_id);
 
     return res.render(`pages/editcomment`, {
       studyspaceId: req.params._id,
@@ -65,10 +63,9 @@ commentRoutes.put(`/studyspaces/:_id/comments/:comment_id`, async (req, res) => 
   }
 
   try {
-    await Comment.findOneAndUpdate({
-      _id: req.params.comment_id
-    }, {
-      text: req.body.comment
+    await Comment.findOneAndUpdate({ _id: req.params.comment_id }, {
+      text: req.body.comment,
+      created: Date.now(),
     });
     return res.redirect(`/studyspaces/${req.params._id}`);
   } catch (error) {
