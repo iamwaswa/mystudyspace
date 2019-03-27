@@ -62,8 +62,8 @@ studyspaceRoutes.get(`/studyspaces/new/:position`, (req, res) => {
     return res.redirect(`/signup`);
   }
 
-  const position = JSON.parse(req.params.position);
-  return res.render(`pages/newentered`, { position });
+  const { lat, lng } = JSON.parse(req.params.position);
+  return res.render(`pages/newentered`, { lat, lng });
 });
 
 // =====================================
