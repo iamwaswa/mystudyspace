@@ -1,43 +1,11 @@
 <% include ../partials/header %>
-  <link type='text/css' rel='stylesheet' href='/stylesheets/pages/newcurrent.css'>
 </head>
 <body>
   <main>
-    <nav>
-      <a 
-        href='/'
-      >
-        MyStudySpace
-      </a>
-      <section>
-        <form
-          id='form'
-          action='/studyspaces'
-          method='POST'
-        >
-          <input 
-            id='input'
-            type='text' 
-            placeholder='Search here...' 
-            name='place' 
-          />
-          <input 
-            type='submit' 
-            value='Search' 
-          />
-        </form>
-      </section>
-    </nav>
+    <% include ../partials/navigation %>
     <section
       class='map-display'
     >
-    </section>
-    <section
-      class='info'
-    >
-      <p>
-        The map shows studyspaces near you. You can also search for a place you know in the search field above.
-      </p>
     </section>
   </main>
   <script>

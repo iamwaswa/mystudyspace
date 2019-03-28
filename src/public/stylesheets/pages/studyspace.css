@@ -1,13 +1,36 @@
 .container {
-  padding: 1rem;
+  padding: 2rem 2rem;
+  color: var(--dark-slate-gray);
+  display: grid;
+  grid-template-columns: auto;
+  grid-row-gap: 1rem;
+  grid-template-rows: auto auto;
 }
 
 @media screen and (min-width: 700px) {
   .container {
-    display: grid;
-    grid-template-columns: auto 2fr;
+    grid-template-columns: 1fr 2fr;
     grid-column-gap: 2rem;
+    grid-row-gap: 0;    
     grid-template-rows: auto;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .container {
+    padding: 2rem 6rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .container {
+    padding: 2rem 8rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    padding: 2rem 12rem;
   }
 }
 
@@ -28,11 +51,15 @@ h1 {
 }
 
 ul {
-  display: inline-block;
+  background-color: var(--ghost-white);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  transition: transform 300ms ease-in;
 }
 
-li {
-  border: 1px solid black;
+ul:hover,
+ul:focus {
+  transform: scale(1.05);
 }
 
 li a {
@@ -41,12 +68,13 @@ li a {
 }
 
 .current {
-  background-color: black;
-  color: white;
+  background-color: var(--bleu-de-france);
+  color: var(--ghost-white);
 }
 
 .content-container {
-  border: 1px solid black;
+  background-color: var(--ghost-white);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (min-width: 700px) {
@@ -56,7 +84,7 @@ li a {
 }
 
 .info-container {
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
 }
 
 @media screen and (min-width: 500px) {
@@ -75,11 +103,12 @@ li a {
 
 .comments-section {
   margin-top: 2rem;
+  background-color: var(--ghost-white);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
 }
 
 .new-comment-container {
   padding: 1rem;
-  border: 1px solid black;
   outline: none;
 }
 
@@ -94,7 +123,7 @@ li a {
 .form-container form {
   display: grid;
   grid-template-columns: 1fr;
-  grid-row-gap: 0.5rem;
+  grid-row-gap: 1rem;
   grid-template-rows: repeat(2, auto);
 }
 
@@ -103,16 +132,16 @@ li a {
   justify-content: flex-end;
 }
 
+.cancel-btn {
+  margin-right: 0.5rem;
+}
+
 .comments-container {
-  border: solid black;
   outline: none;
-  border-width: 0px 0.5px 0.5px 0.5px;
 }
 
 .single-comment-container {
   padding: 1rem;
-  border: solid black;
-  border-width: 0.5px 0.5px 0.25px 0.25px;
 }
 
 .header-section {

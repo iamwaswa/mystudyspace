@@ -2,15 +2,31 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  border: 1px solid black;
+  align-items: stretch;
   height: auto;
   margin: auto;
-  padding: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+  background-color: var(--ghost-white);
+  color: var(--dark-gray-slate);
+}
+
+@media all and (min-width: 600px) {
+  .container {
+    width: 50vw;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .container {
+    width: 40vw;
+  }
 }
 
 h2 {
   margin-top: 0;
+  color: var(--dark-gray-slate);
+  text-align: center;
 }
 
 form {
@@ -19,5 +35,5 @@ form {
 }
 
 input[type='text'] {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }

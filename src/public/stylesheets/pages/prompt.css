@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   height: auto;
   margin: 1rem auto;
@@ -11,15 +11,30 @@
 .use-current-location {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   text-align: center;
   padding: 1rem;
   margin-bottom: 1rem;
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+@media all and (min-width: 400px) {
+  .use-current-location {
+    padding: 2rem;
+  }
 }
 
 .use-entered-location {
-  border: 1px solid black;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   padding: 1rem;
+}
+
+@media all and (min-width: 400px) {
+  .use-entered-location {
+    padding: 2rem;
+  }
 }
 
 p {

@@ -1,0 +1,33 @@
+:root {
+  --bleu-de-france: rgb(34, 140, 219);
+  --mountain-meadow: rgb(22, 223, 137);
+  --dark-slate-gray: rgb(59, 66, 72);
+  --ghost-white: rgb(249, 250, 250);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--bleu-de-france);
+  color: var(--ghost-white);
+}
+
+.content h2 {
+  font-size: 1.5rem;
+  animation: 
+    slideup 500ms ease-in 0s 1 forwards normal,
+    fadein 500ms ease-in 0s 1 forwards normal;
+}
+
+@media all and (min-width: 407px) {
+  .content h2 {
+    font-size: 2rem;
+  }
+}
+
+.content a {
+  animation: fadein 500ms ease-in 0s 1 forwards normal;
+}

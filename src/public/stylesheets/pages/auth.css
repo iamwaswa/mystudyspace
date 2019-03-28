@@ -1,28 +1,36 @@
 main {
   grid-template-rows: auto;
+  padding: 2rem;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  border: 1px solid black;
+  align-items: stretch;
   height: auto;
   margin: auto;
-  padding: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+  background-color: var(--ghost-white);
+  color: var(--dark-gray-slate);
 }
 
-.message-section {
-  animation-name: fadein;
-  animation-duration: 300ms;
-  animation-timing-function: ease-in;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
+@media all and (min-width: 673px) {
+  .container {
+    width: 50vw;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .container {
+    width: 40vw;
+  }
 }
 
 h2 {
   margin-top: 0;
+  text-align: center;
 }
 
 form {
@@ -37,12 +45,5 @@ input {
 
 input[type='text'],
 input[type='password'] {
-  margin-bottom: 0.5rem;
-}
-
-@media screen and (min-width: 768px) {
-  input[type='text'],
-  input[type='password'] {
-    width: 50vw;
-  }
+  margin-bottom: 1rem;
 }

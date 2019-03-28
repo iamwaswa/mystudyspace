@@ -1,11 +1,11 @@
 <% include ../partials/header %>
-  <link type="text/css" rel="stylesheet" href="/stylesheets/pages/index.css">
+  <link type="text/css" rel="stylesheet" href="/stylesheets/pages/home.css">
 </head>
 <body>
   <main>
   <% if (Object.keys(message).length) { %>
     <section
-      class='message-section shift-down'
+      class='message-section'
     >
       <p
         class='success-message'
@@ -18,9 +18,9 @@
     <section
       class='content'
     >
-      <p>
-        Welcome to MyStudySpace
-      </p>
+      <h2>
+        Welcome To MyStudySpace
+      </h2>
       <a
         class='button-normal'
         href='/studyspaces'
