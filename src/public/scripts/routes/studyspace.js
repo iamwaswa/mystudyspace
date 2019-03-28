@@ -15,7 +15,7 @@ studyspaceRoutes.get(`/studyspaces/new`, (req, res) => {
     return res.redirect(`/signup`);
   }
 
-  return res.render(`pages/newcurrent`);
+  return res.render(`pages/new`, { lat: ``, lng: `` });
 });
 
 // =====================================
@@ -63,7 +63,7 @@ studyspaceRoutes.get(`/studyspaces/new/:position`, (req, res) => {
   }
 
   const { lat, lng } = JSON.parse(req.params.position);
-  return res.render(`pages/newentered`, { lat, lng });
+  return res.render(`pages/new`, { lat, lng });
 });
 
 // =====================================

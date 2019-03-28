@@ -7,6 +7,20 @@
       class='map-display'
     >
     </section>
+    <p
+      class='lat'
+    >
+    <% if (lat) { %>
+      <%= lat %>
+    <% } %>
+    </p>
+    <p
+      class='lng'
+    >
+    <% if (lng) { %>
+      <%= lng %>
+    <% } %>
+    </p>
   </main>
   <script 
     async 
@@ -14,8 +28,10 @@
     src='https://maps.googleapis.com/maps/api/js?key=<%=process.env.GOOGLE_MAPS_API_KEY%>&libraries=places'
   >
   </script>
-  <script 
-    src='/scripts/pages/newcurrent.js'
+  <script
+    async
+    defer
+    src='/scripts/pages/new.js'
   >
   </script>
 </body>

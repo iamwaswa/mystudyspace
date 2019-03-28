@@ -116,11 +116,26 @@ const assignMyPosition = (position) => {
   initMap();
 };
 
+const latParagraph = document.getElementsByClassName(`lat`)[0];
+const lngParagraph = document.getElementsByClassName(`lng`)[0];
+
 const findMyLocation = () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(assignMyPosition);
+  if (latParagraph && lngParagraph) {
+    const lat = Number(latParagraph.textContent);
+    const lng = Number(lngParagraph.textContent);
+    const position = {
+      coords: {
+        latitude: lat,
+        longitude: lng,
+      },
+    };
+    assignMyPosition(position);
   } else {
-    alert(`Your browser does not support geolcation. Consider updating your browser to the latest version or using a different browser`);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(assignMyPosition);
+    } else {
+      alert(`Your browser does not support geolcation. Consider updating your browser to the latest version or using a different browser`);
+    }
   }
 };
 

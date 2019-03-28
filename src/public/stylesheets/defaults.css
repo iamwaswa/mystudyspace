@@ -234,3 +234,11 @@ a {
     margin-top: 0px;
   }
 }
+
+.lat {
+  display: none;
+}
+
+.lng {
+  display: none;
+}
