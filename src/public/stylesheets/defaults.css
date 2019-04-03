@@ -78,6 +78,8 @@ nav section {
   display: block;
   position: relative;
   z-index: 2;
+  width: 20px;
+  height: 10px;
 }
 
 .title {
@@ -106,6 +108,15 @@ nav section {
 .narrow-nav-link {
   display: block;
   position: relative;
+}
+
+.svg {
+  position: absolute;
+}
+
+path {
+  stroke: var(--ghost-white);
+  stroke-width: 2px;
 }
 
 @media screen and (min-width: 650px) {
