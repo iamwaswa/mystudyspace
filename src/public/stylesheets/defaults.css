@@ -31,6 +31,7 @@ nav {
   display: flex;
   padding: 1rem;
   justify-content: space-between;
+  align-items: center;
   background-color: var(--bleu-de-france);
   color: var(--ghost-white);
 }
@@ -80,6 +81,13 @@ nav section {
   z-index: 2;
   width: 20px;
   height: 10px;
+  transform: scale(1);
+  transition: transform ease-in-out 300ms;
+}
+
+.narrow:hover,
+.narrow:focus {
+  transform: scale(1.2);
 }
 
 .title {
@@ -112,11 +120,18 @@ nav section {
 
 .svg {
   position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.hidden {
+  display: none;
 }
 
 path {
   stroke: var(--ghost-white);
   stroke-width: 2px;
+  stroke-linecap: round;
 }
 
 @media screen and (min-width: 650px) {
