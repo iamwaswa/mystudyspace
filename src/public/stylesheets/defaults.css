@@ -120,12 +120,14 @@ nav section {
 
 .svg {
   position: absolute;
+  opacity: 1;
   width: 20px;
   height: 20px;
+  transition: opacity ease-in-out 300ms;
 }
 
 .hidden {
-  display: none;
+  opacity: 0;
 }
 
 path {

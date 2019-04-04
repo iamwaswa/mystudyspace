@@ -1,3 +1,6 @@
+// =====================================
+// MENU DRAWER DISPLAY HANDLING ========
+// =====================================
 const menuIcon = document.getElementById(`menu-icon`);
 const menu = document.getElementById(`menu`);
 

@@ -1,3 +1,6 @@
+// =====================================
+// MENU ICON CHANGE HANDLING ===========
+// =====================================
 const hamburgerMenuIcon = document.getElementById(`hamburger`);
 const closeMenuIcon = document.getElementById(`close`);
 
