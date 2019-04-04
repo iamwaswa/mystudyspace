@@ -1,6 +1,7 @@
 main {
-  grid-template-rows: auto;
-  padding: 2rem;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 600px;
 }
 
 .container {
