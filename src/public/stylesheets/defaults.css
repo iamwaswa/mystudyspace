@@ -25,6 +25,7 @@ main {
   grid-template-columns: 1fr;
   grid-template-rows: 50px auto;
   height: 100%;
+  opacity: 1;
 }
 
 nav {
@@ -53,16 +54,33 @@ nav section {
   right: 0;
   z-index: 1;
   height: 100vh;
-  width: 50vw;
+  width: 200px;
   padding: 1rem;
   color: var(--ghost-white);
   background-color: var(--dark-slate-gray);
 }
 
+@media screen and (min-width: 420px) {
+  .menu {
+    width: 300px;
+  }
+}
+
+header {
+  margin-bottom: 1rem;
+}
+
 .show-menu {
+  display: flex;
   animation: 
     fadein 300ms ease-in 1 forwards normal,
     menuslideinfromright 300ms ease-in 1 forwards normal;
+}
+
+@media screen and (min-width: 650px) {
+  .show-menu {
+    display: none;
+  }
 }
 
 .hide-menu {
@@ -71,13 +89,32 @@ nav section {
     menuslideouttoright 300ms ease-in 1 forwards normal;
 }
 
+.seethrough {
+  animation-name: seethrough;
+  animation-duration: 300ms;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes seethrough {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
 .menu-item {
   margin-bottom: 1rem;
 }
 
 .narrow {
   display: block;
-  position: relative;
+  position: fixed;
+  right: 1rem;
   z-index: 2;
   width: 20px;
   height: 10px;
@@ -296,7 +333,7 @@ a {
 
 .message-section {
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   top: 50px;
   left: 0;
   width: 100%;
