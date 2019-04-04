@@ -132,7 +132,7 @@ li a {
   justify-content: flex-end;
 }
 
-.cancel-btn {
+#submit {
   margin-right: 0.5rem;
 }
 
