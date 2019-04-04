@@ -15,7 +15,7 @@
 html, 
 body {
   margin: 0;
-  height: 100%;
+  height: auto;
   min-height: 480px;
   min-width: 320px;
 } 
@@ -24,7 +24,7 @@ main {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 50px auto;
-  height: 100%;
+  height: auto;
   opacity: 1;
 }
 
@@ -50,12 +50,12 @@ nav section {
   justify-content: flex-start;
   align-items: flex-start;
   opacity: 0;
-  top: 0;
   right: 0;
+  bottom: 0;
   z-index: 1;
-  height: 100vh;
+  height: 100%;
   width: 200px;
-  padding: 1rem;
+  padding: 3rem 2rem;
   color: var(--ghost-white);
   background-color: var(--dark-slate-gray);
 }
@@ -113,7 +113,7 @@ header {
 
 .narrow {
   display: block;
-  position: fixed;
+  position: absolute;
   right: 1rem;
   z-index: 2;
   width: 20px;
